@@ -19,9 +19,12 @@ const Login = ({ navigation }) => {
     const signUpHandler = () => {
         navigation.navigate('SignUp');
     }
+
     const forgotPassHandler = () => {
         navigation.navigate('ForgotPassword')
     }
+
+
     const loginInHandler = async () => {
         if (email) {
             if (password) {
@@ -33,8 +36,11 @@ const Login = ({ navigation }) => {
                     var results = await api.loginUser(data);
 
 
-                    // console.log(results );
-                    Alert.alert("Message", results?.Message);
+                    console.log(results );
+                    if (results?.Message == 'Not Verified') {
+                        navigation.navigate('EmailVerification');
+                    }
+                    // Alert.alert("Message", results?.Message);
                 } catch (err) {
                     console.log(err);
                 }

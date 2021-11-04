@@ -1,4 +1,4 @@
-const CONVEYGO_URL = 'http://192.168.1.101:5000';
+const CONVEYGO_URL = 'https://conveygo-microservice.herokuapp.com';
 
 const Path = {
     //user
