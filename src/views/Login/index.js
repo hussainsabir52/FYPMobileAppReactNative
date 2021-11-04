@@ -42,6 +42,8 @@ const Login = ({ navigation }) => {
                 Alert.alert("Error", "Please enter a password.");
             }
 
+        } else {
+            Alert.alert("Error", "Please enter an email and password to continue");
         }
 
     }
