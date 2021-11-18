@@ -1,5 +1,19 @@
-const axios = require('axios').default;
+const axios = require('axios');
 const { Path } = require('../config/Path')
+
+
+const signUpUser = async (payLoad) => {
+    try {
+        if (payLoad) {
+            const { data } = await axios.post(`${Path.USER_SIGNUP}`, payLoad);
+            return data;
+        }
+        console.log('Unable to find request param');
+    } catch (err) {
+        console.log(err);
+    }
+};
+
 
 const loginUser = async (payLoad) => {
     try {
@@ -13,6 +27,33 @@ const loginUser = async (payLoad) => {
     }
 };
 
+const verifyEmail = async (payload) => {
+    try {
+        if (payload) {
+            const { data } = await axios.post(`${Path.USER_VERIFYEMAIL}`, payload);
+            return data;
+        }
+        console.log('Unable to find request param');
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+const confirmEmail = async (payload) => {
+    try {
+        if (payload) {
+            const { data } = await axios.post(`${Path.USER_CONFIRMEMAIL}`, payload);
+            return data;
+        }
+        console.log('Unable to find request param');
+    } catch (err) {
+        console.log(err);
+    }
+};
+
 export default {
-    loginUser
+    signUpUser,
+    loginUser,
+    verifyEmail,
+    confirmEmail
 }

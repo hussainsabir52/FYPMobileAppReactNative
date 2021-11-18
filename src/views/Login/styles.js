@@ -3,7 +3,7 @@ export default styles = StyleSheet.create({
     signUpText: {
         textAlign: 'center',
         fontWeight: 'bold',
-
+        color: '#3b3d40'
     },
     signUpView: {
         marginTop: 50,
@@ -11,7 +11,8 @@ export default styles = StyleSheet.create({
     forgotPassText: {
         marginTop: 10,
         textAlign: 'right',
-        marginRight: 10
+        marginRight: 10,
+        color: '#4f4f4f'
     },
     textInputView: {
         marginTop: 15,
@@ -82,7 +83,6 @@ export default styles = StyleSheet.create({
         margin: 5,
         height: 40,
         fontSize: 15,
-        backgroundColor: 'rgba(0,0,0,0)',
         borderRadius: 10,
         color: '#000',
         flex: 1,

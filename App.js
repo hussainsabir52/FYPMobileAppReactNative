@@ -7,31 +7,17 @@
  */
 
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 
 import Navigation from './src/navigation/AuthNavigator'
 import { NavigationContainer } from "@react-navigation/native";
+import FlashMessage from "react-native-flash-message";
 
 const App = () => {
   return (
     <NavigationContainer>
       <Navigation />
+      <FlashMessage position="top" />
     </NavigationContainer>
 
   );
