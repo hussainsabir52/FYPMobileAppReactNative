@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { StyleSheet, ScrollView, Text, View, TextInput, Alert } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'
-
+import { showMessage, hideMessage } from "react-native-flash-message";
 
 import Button from '../../components/Button';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import styles from './styles';
 
@@ -34,22 +33,34 @@ const Login = ({ navigation }) => {
                 };
                 try {
                     var results = await api.loginUser(data);
-
-
-                    console.log(results );
-                    if (results?.Message == 'Not Verified') {
-                        navigation.navigate('EmailVerification');
+                    console.log(results);
+                    if (results) {
+                        if (results?.Message == 'Not Verified') {
+                            navigation.navigate('EmailVerification', { email: email });
+                        }
+                        else {
+                            navigation.navigate('Home');
+                        }
                     }
-                    // Alert.alert("Message", results?.Message);
                 } catch (err) {
                     console.log(err);
+                    showMessage({
+                        message: err.message,
+                        type: 'danger'
+                    });
                 }
             } else {
-                Alert.alert("Error", "Please enter a password.");
+                showMessage({
+                    message: 'Password Required !!',
+                    type: 'danger'
+                });
             }
 
         } else {
-            Alert.alert("Error", "Please enter an email and password to continue");
+            showMessage({
+                message: 'Username Required !!',
+                type: 'danger'
+            });
         }
 
     }
@@ -75,6 +86,7 @@ const Login = ({ navigation }) => {
 
                 <TextInput
                     placeholder="Username"
+                    placeholderTextColor="#4f4f4f"
                     style={styles.textInput}
                     onChangeText={(value) => setEmail(value)}
                 />
@@ -84,10 +96,10 @@ const Login = ({ navigation }) => {
 
                 <TextInput
                     placeholder="Password"
+                    placeholderTextColor="#4f4f4f"
                     secureTextEntry={true}
                     style={styles.textInput}
                     onChangeText={(value) => setPassword(value)}
-
                 />
             </View>
             <View>

@@ -3,12 +3,10 @@ export default styles = StyleSheet.create({
     signUpText: {
         textAlign: 'center',
         fontWeight: 'bold',
+
     },
     signUpView: {
-        marginTop: 20,
-        marginBottom: 40,
-        flexDirection: 'row',
-        justifyContent: 'center'
+        marginTop: 50,
     },
     forgotPassText: {
         marginTop: 10,
@@ -33,12 +31,17 @@ export default styles = StyleSheet.create({
         shadowRadius: 3,
         elevation: 8,
     },
-
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center'
+    },
     text_body: {
         color: '#BABABA',
-        fontSize: 17,
+        fontSize: 20,
         fontFamily: 'Roboto',
-        textAlign: 'center'
+        textAlign: 'center',
+        color: '#000'
     },
     medium_title: {
         fontSize: 25,
@@ -65,10 +68,9 @@ export default styles = StyleSheet.create({
     },
     scroll: {
         backgroundColor: '#F5F5F5',
+        padding: 30,
         height: '100%',
-        paddingLeft: 40,
-        paddingRight: 40,
-        paddingTop: 25
+
     },
     label: {
         color: '#0d8898',

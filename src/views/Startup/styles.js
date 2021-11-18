@@ -1,19 +1,22 @@
 import { StyleSheet } from "react-native";
 export default styles = StyleSheet.create({
+    lottie: {
+        width: 100,
+        height: 100
+    },
     signUpText: {
         textAlign: 'center',
         fontWeight: 'bold',
+        color: '#3b3d40'
     },
     signUpView: {
-        marginTop: 20,
-        marginBottom: 40,
-        flexDirection: 'row',
-        justifyContent: 'center'
+        marginTop: 50,
     },
     forgotPassText: {
         marginTop: 10,
         textAlign: 'right',
-        marginRight: 10
+        marginRight: 10,
+        color: '#4f4f4f'
     },
     textInputView: {
         marginTop: 15,
@@ -33,10 +36,14 @@ export default styles = StyleSheet.create({
         shadowRadius: 3,
         elevation: 8,
     },
-
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center'
+    },
     text_body: {
         color: '#BABABA',
-        fontSize: 17,
+        fontSize: 15,
         fontFamily: 'Roboto',
         textAlign: 'center'
     },
@@ -65,10 +72,9 @@ export default styles = StyleSheet.create({
     },
     scroll: {
         backgroundColor: '#F5F5F5',
+        padding: 30,
         height: '100%',
-        paddingLeft: 40,
-        paddingRight: 40,
-        paddingTop: 25
+        marginHorizontal: 20
     },
     label: {
         color: '#0d8898',
@@ -81,7 +87,6 @@ export default styles = StyleSheet.create({
         margin: 5,
         height: 40,
         fontSize: 15,
-        backgroundColor: 'rgba(0,0,0,0)',
         borderRadius: 10,
         color: '#000',
         flex: 1,
