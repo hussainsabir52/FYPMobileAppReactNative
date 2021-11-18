@@ -20,7 +20,7 @@ const Login = ({ navigation }) => {
     }
 
     const forgotPassHandler = () => {
-        navigation.navigate('ForgotPassword')
+        navigation.navigate('Home')
     }
 
 

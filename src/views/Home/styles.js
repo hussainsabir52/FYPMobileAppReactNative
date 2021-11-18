@@ -1,128 +1,170 @@
 import { StyleSheet } from "react-native";
 export default styles = StyleSheet.create({
-    signUpText: {
-        textAlign: 'center',
-        fontWeight: 'bold',
+    optionCard: {
+        alignParentLeft: true,
+        alignParentTop: true,
+        width: 150,
+        height: 231,
+        marginLeft: 8,
+        marginTop: 150,
+        backgroundColor: '#46425B',
+        elevation: 4,
+        borderTopRightRadius: 20,
+        borderTopLeftRadius: 20,
+        borderBottomRightRadius: 10,
+        borderBottomLeftRadius: 10,
+        // box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
+        // border-radius: 20px 20px 10px 10px
+    },
+    optionCard1: {
+        alignParentLeft: true,
+        alignParentTop: true,
+        position: "absolute",
+        width: 150,
+        height: 231,
+        marginLeft: 185,
+        marginTop: 150,
+        backgroundColor: '#46425B',
+        elevation: 4,
+        borderTopRightRadius: 20,
+        borderTopLeftRadius: 20,
+        borderBottomRightRadius: 10,
+        borderBottomLeftRadius: 10,
+        // box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
+        // border-radius: 20px 20px 10px 10px
+    },
+    optionCard2: {
+        alignParentLeft: true,
+        alignParentTop: true,
+        position: "absolute",
+        width: 150,
+        height: 231,
+        marginLeft: 8,
+        marginTop: 412,
+        elevation: 4,
+        backgroundColor: '#46425B',
+        borderTopRightRadius: 20,
+        borderTopLeftRadius: 20,
+        borderBottomRightRadius: 10,
+        borderBottomLeftRadius: 10,
+        // box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
+        // border-radius: 20px 20px 10px 10px
+    },
+    optionCard3: {
+        alignParentLeft: true,
+        alignParentTop: true,
+        width: 150,
+        height: 231,
+        marginLeft: 185,
+        marginTop: 32,
+        elevation: 4,
+        backgroundColor: '#46425B',
+        borderTopRightRadius: 20,
+        borderTopLeftRadius: 20,
+        borderBottomRightRadius: 10,
+        borderBottomLeftRadius: 10,
+        // border-radius: 20px 20px 10px 10px
+    },
+    RideImg: {
+        width: 150,
+        height: 100,
+        borderTopRightRadius: 20,
+        borderTopLeftRadius: 20,
+        borderBottomRightRadius: 10,
+        borderBottomLeftRadius: 10,
+        
+    },
+    CarpoolImg: {
+        width: 150,
+        height: 100,
+        borderTopRightRadius: 20,
+        borderTopLeftRadius: 20,
+        borderBottomRightRadius: 10,
+        borderBottomLeftRadius: 10,
+        
+    },
+    ScheduleImg: {
+        width: 150,
+        height: 100,
+        borderTopRightRadius: 20,
+        borderTopLeftRadius: 20,
+        borderBottomRightRadius: 10,
+        borderBottomLeftRadius: 10,
+        
+    },
+    DeliveryImg: {
+        width: 150,
+        height: 100,
+        borderTopRightRadius: 20,
+        borderTopLeftRadius: 20,
+        borderBottomRightRadius: 10,
+        borderBottomLeftRadius: 10,
+        
+    },
+    RideTxt: {
+        color: '#ffffff',
+        height: 26,
+        fontFamily: "Bebas Neue",
+        fontSize: 18,
+        fontStyle: "normal",
+        fontWeight: "700",
+        top: 10,
+        textAlign: "center"
 
     },
-    signUpView: {
-        marginTop: 50,
-    },
-    forgotPassText: {
-        marginTop: 10,
-        textAlign: 'right',
-        marginRight: 10
-    },
-    textInputView: {
-        marginTop: 15,
-        flexDirection: 'row',
-        borderColor: '#000',
-        alignItems: 'center',
-        borderRadius: 40,
-        paddingLeft: 10,
-        backgroundColor: '#FFFFFF',
-        margin: 5,
+    CarpoolTxt: {
+        color: '#ffffff',
+        height: 26,
+        fontFamily: "Bebas Neue",
+        fontSize: 18,
+        fontStyle: "normal",
+        fontWeight: "700",
+        top: 10,
+        textAlign: "center"
 
     },
-    viewShadow: {
-        shadowColor: '#171717',
-        shadowOffset: { width: -2, height: 4 },
-        shadowOpacity: 0.2,
-        shadowRadius: 3,
-        elevation: 8,
+    ScheduleTxt: {
+        color: '#ffffff',
+        height: 26,
+        fontFamily: "Bebas Neue",
+        fontSize: 18,
+        fontStyle: "normal",
+        fontWeight: "700",
+        top: 10,
+        textAlign: "center"
+
     },
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center'
+    DeliveryTxt: {
+        color: '#ffffff',
+        height: 26,
+        fontFamily: "Bebas Neue",
+        fontSize: 18,
+        fontStyle: "normal",
+        fontWeight: "700",
+        top: 10,
+        textAlign: "center"
+
     },
-    text_body: {
-        color: '#BABABA',
-        fontSize: 20,
-        fontFamily: 'Roboto',
-        textAlign: 'center',
-        color: '#000'
-    },
-    medium_title: {
-        fontSize: 25,
+    buttonWhiteText: {
+        fontSize: 12,
+        textAlign: "center",
+        top: 6,
         color: '#000',
-        fontWeight: 'bold',
+        fontWeight: 'bold'
     },
-    flex_row: {
-        flexGrow: 0,
-        flexShrink: 1
-    },
-    text_body_box_layout: {
-        marginTop: 15,
-        marginBottom: 15
-    },
-    text_body_box: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    medium_title_box: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center'
+    primaryButton: {
+        backgroundColor: '#FEDB29',
+        borderRadius: 30,
+        color: '#ff5c5c',
+        height: 30,
+        width: 100,
+        left: 25,
+        top: 30
     },
     scroll: {
         backgroundColor: '#F5F5F5',
         padding: 30,
         height: '100%',
 
-    },
-    label: {
-        color: '#0d8898',
-        fontSize: 20
-    },
-    alignRight: {
-        alignSelf: 'flex-end'
-    },
-    textInput: {
-        margin: 5,
-        height: 40,
-        fontSize: 15,
-        backgroundColor: 'rgba(0,0,0,0)',
-        borderRadius: 10,
-        color: '#000',
-        flex: 1,
-    },
-    buttonWhiteText: {
-        fontSize: 15,
-        color: '#000',
-        fontWeight: 'bold'
-    },
-    buttonBlackText: {
-        fontSize: 20,
-        color: '#595856'
-    },
-    primaryButton: {
-        backgroundColor: '#FEDB29',
-        borderRadius: 30,
-        color: '#ff5c5c',
-        height: 60,
-        width: 180,
-    },
-    transparentButton: {
-        marginTop: 30,
-        borderColor: '#3B5699',
-        borderWidth: 2
-    },
-    buttonBlueText: {
-        fontSize: 20,
-        color: '#3B5699'
-    },
-    buttonBigText: {
-        fontSize: 20,
-        fontWeight: 'bold'
-    },
-    inline: {
-        flexDirection: 'row'
-    },
-    footer: {
-        marginTop: 30,
-        flexDirection: 'row',
-        justifyContent: 'center'
     }
 });
