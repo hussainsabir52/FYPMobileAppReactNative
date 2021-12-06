@@ -3,15 +3,21 @@ import { StyleSheet, ScrollView, Text, View, TextInput, Alert } from 'react-nati
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'
 import { showMessage, hideMessage } from "react-native-flash-message";
-
+import { isLogged } from '../../actions/isLogged';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Button from '../../components/Button';
-
+import AsyncStorage from '@react-native-community/async-storage';
 import styles from './styles';
 
 import api from '../../services/api'
+// import { getStateFromPath } from '@react-navigation/native';
+
 
 const Login = ({ navigation }) => {
-
+    const userdata = useSelector(state => state.isLogged);
+    console.log(userdata);
+    const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -33,12 +39,18 @@ const Login = ({ navigation }) => {
                 };
                 try {
                     var results = await api.loginUser(data);
-                    console.log(results);
+                    console.log(results.Message);
                     if (results) {
                         if (results?.Message == 'Not Verified') {
                             navigation.navigate('EmailVerification', { email: email });
                         }
                         else {
+                            try {
+                                await AsyncStorage.setItem('userData', results.userInfo);
+                              } catch (e) {
+                                console.log(e);
+                              }
+                            dispatch(isLogged(results.userInfo));
                             navigation.navigate('Home');
                         }
                     }

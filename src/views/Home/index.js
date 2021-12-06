@@ -9,7 +9,6 @@ import {
   Image,
 } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-
 import styles from './styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 //import Button from '../../components/Button';
