@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, ScrollView, Text, View, TextInput, Alert } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'
@@ -7,7 +7,7 @@ import { isLogged } from '../../actions/isLogged';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import Button from '../../components/Button';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './styles';
 
 import api from '../../services/api'
@@ -15,11 +15,21 @@ import api from '../../services/api'
 
 
 const Login = ({ navigation }) => {
-    const userdata = useSelector(state => state.isLogged);
-    console.log(userdata);
+
     const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    useEffect(()=> {
+        try {
+          const value = AsyncStorage.getItem('userData');
+          if (value !== null) {
+            navigation.navigate('Home');
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      },[]);
 
     const signUpHandler = () => {
         navigation.navigate('SignUp');

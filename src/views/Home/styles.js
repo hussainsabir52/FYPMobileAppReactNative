@@ -13,8 +13,6 @@ export default styles = StyleSheet.create({
         borderTopLeftRadius: 20,
         borderBottomRightRadius: 10,
         borderBottomLeftRadius: 10,
-        // box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
-        // border-radius: 20px 20px 10px 10px
     },
     optionCard1: {
         alignParentLeft: true,
@@ -65,43 +63,15 @@ export default styles = StyleSheet.create({
         borderBottomLeftRadius: 10,
         // border-radius: 20px 20px 10px 10px
     },
-    RideImg: {
+    OptImg: {
         width: 150,
         height: 100,
         borderTopRightRadius: 20,
         borderTopLeftRadius: 20,
         borderBottomRightRadius: 10,
         borderBottomLeftRadius: 10,
-        
     },
-    CarpoolImg: {
-        width: 150,
-        height: 100,
-        borderTopRightRadius: 20,
-        borderTopLeftRadius: 20,
-        borderBottomRightRadius: 10,
-        borderBottomLeftRadius: 10,
-        
-    },
-    ScheduleImg: {
-        width: 150,
-        height: 100,
-        borderTopRightRadius: 20,
-        borderTopLeftRadius: 20,
-        borderBottomRightRadius: 10,
-        borderBottomLeftRadius: 10,
-        
-    },
-    DeliveryImg: {
-        width: 150,
-        height: 100,
-        borderTopRightRadius: 20,
-        borderTopLeftRadius: 20,
-        borderBottomRightRadius: 10,
-        borderBottomLeftRadius: 10,
-        
-    },
-    RideTxt: {
+    OptTxt: {
         color: '#ffffff',
         height: 26,
         fontFamily: "Bebas Neue",
@@ -110,40 +80,6 @@ export default styles = StyleSheet.create({
         fontWeight: "700",
         top: 10,
         textAlign: "center"
-
-    },
-    CarpoolTxt: {
-        color: '#ffffff',
-        height: 26,
-        fontFamily: "Bebas Neue",
-        fontSize: 18,
-        fontStyle: "normal",
-        fontWeight: "700",
-        top: 10,
-        textAlign: "center"
-
-    },
-    ScheduleTxt: {
-        color: '#ffffff',
-        height: 26,
-        fontFamily: "Bebas Neue",
-        fontSize: 18,
-        fontStyle: "normal",
-        fontWeight: "700",
-        top: 10,
-        textAlign: "center"
-
-    },
-    DeliveryTxt: {
-        color: '#ffffff',
-        height: 26,
-        fontFamily: "Bebas Neue",
-        fontSize: 18,
-        fontStyle: "normal",
-        fontWeight: "700",
-        top: 10,
-        textAlign: "center"
-
     },
     buttonWhiteText: {
         fontSize: 12,
