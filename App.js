@@ -8,18 +8,29 @@
 
 import React from 'react';
 
+import Navigation from './src/navigation/AuthNavigator';
+import { getStateFromPath, NavigationContainer } from '@react-navigation/native';
+import FlashMessage from 'react-native-flash-message';
+import { createStore } from 'redux';
+import rootReducers from './src/reducers';
+import { Provider } from 'react-redux';
 
-import Navigation from './src/navigation/AuthNavigator'
-import { NavigationContainer } from "@react-navigation/native";
-import FlashMessage from "react-native-flash-message";
+
+const store = createStore(rootReducers);
+
+
 
 const App = () => {
-  return (
-    <NavigationContainer>
-      <Navigation />
-      <FlashMessage position="top" />
-    </NavigationContainer>
 
+  
+
+  return (
+    <Provider store={store}>
+      <NavigationContainer>
+        <Navigation />
+        <FlashMessage position="top" />
+      </NavigationContainer>
+    </Provider>
   );
 };
 

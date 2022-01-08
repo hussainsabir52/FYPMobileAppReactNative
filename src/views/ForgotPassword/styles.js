@@ -1,18 +1,5 @@
 import { StyleSheet } from "react-native";
 export default styles = StyleSheet.create({
-    signUpText: {
-        textAlign: 'center',
-        fontWeight: 'bold',
-
-    },
-    signUpView: {
-        marginTop: 50,
-    },
-    forgotPassText: {
-        marginTop: 10,
-        textAlign: 'right',
-        marginRight: 10
-    },
     textInputView: {
         marginTop: 15,
         flexDirection: 'row',
@@ -72,13 +59,6 @@ export default styles = StyleSheet.create({
         height: '100%',
 
     },
-    label: {
-        color: '#0d8898',
-        fontSize: 20
-    },
-    alignRight: {
-        alignSelf: 'flex-end'
-    },
     textInput: {
         margin: 5,
         height: 40,
@@ -93,32 +73,12 @@ export default styles = StyleSheet.create({
         color: '#000',
         fontWeight: 'bold'
     },
-    buttonBlackText: {
-        fontSize: 20,
-        color: '#595856'
-    },
     primaryButton: {
         backgroundColor: '#FEDB29',
         borderRadius: 30,
         color: '#ff5c5c',
         height: 60,
         width: 180,
-    },
-    transparentButton: {
-        marginTop: 30,
-        borderColor: '#3B5699',
-        borderWidth: 2
-    },
-    buttonBlueText: {
-        fontSize: 20,
-        color: '#3B5699'
-    },
-    buttonBigText: {
-        fontSize: 20,
-        fontWeight: 'bold'
-    },
-    inline: {
-        flexDirection: 'row'
     },
     footer: {
         marginTop: 30,

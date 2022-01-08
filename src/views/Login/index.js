@@ -1,19 +1,43 @@
-import React, { useState } from 'react';
-import { StyleSheet, ScrollView, Text, View, TextInput, Alert } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, ScrollView, Text, View, TextInput, Alert, ActivityIndicator } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'
 import { showMessage, hideMessage } from "react-native-flash-message";
-
+import { isLogged } from '../../actions/isLogged';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../components/Button';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './styles';
 
 import api from '../../services/api'
+// import { getStateFromPath } from '@react-navigation/native';
+
 
 const Login = ({ navigation }) => {
 
+    const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    // const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(()=> {
+        try {
+          const value = AsyncStorage.getItem('userData');
+          if (value !== null) {
+            navigation.navigate('Home');
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      },[]);
+
+    //   useEffect(() => {
+    //     if (isLoading === true){
+    //         return(
+    //             <ActivityIndicator size='large' style={{flex:1, alignItems: 'center', justifyContent: 'center'}}/>);
+    //     }
+    //   },[isLoading])
+    
 
     const signUpHandler = () => {
         navigation.navigate('SignUp');
@@ -32,13 +56,21 @@ const Login = ({ navigation }) => {
                     password: password
                 };
                 try {
+                    // setIsLoading(true);
                     var results = await api.loginUser(data);
-                    console.log(results);
+                    console.log(results.Message);
                     if (results) {
+                        // setIsLoading(false);
                         if (results?.Message == 'Not Verified') {
                             navigation.navigate('EmailVerification', { email: email });
                         }
                         else {
+                            try {
+                                await AsyncStorage.setItem('userData', results.userInfo);
+                              } catch (e) {
+                                console.log(e);
+                              }
+                            dispatch(isLogged(results.userInfo));
                             navigation.navigate('Home');
                         }
                     }
