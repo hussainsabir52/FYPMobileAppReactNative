@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, ScrollView, Text, View, TextInput, Alert } from 'react-native';
+import { StyleSheet, ScrollView, Text, View, TextInput, Alert, ActivityIndicator } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'
 import { showMessage, hideMessage } from "react-native-flash-message";
 import { isLogged } from '../../actions/isLogged';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../components/Button';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './styles';
@@ -19,6 +18,7 @@ const Login = ({ navigation }) => {
     const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    // const [isLoading, setIsLoading] = useState(true);
 
     useEffect(()=> {
         try {
@@ -30,6 +30,14 @@ const Login = ({ navigation }) => {
           console.log(e);
         }
       },[]);
+
+    //   useEffect(() => {
+    //     if (isLoading === true){
+    //         return(
+    //             <ActivityIndicator size='large' style={{flex:1, alignItems: 'center', justifyContent: 'center'}}/>);
+    //     }
+    //   },[isLoading])
+    
 
     const signUpHandler = () => {
         navigation.navigate('SignUp');
@@ -48,9 +56,11 @@ const Login = ({ navigation }) => {
                     password: password
                 };
                 try {
+                    // setIsLoading(true);
                     var results = await api.loginUser(data);
                     console.log(results.Message);
                     if (results) {
+                        // setIsLoading(false);
                         if (results?.Message == 'Not Verified') {
                             navigation.navigate('EmailVerification', { email: email });
                         }
