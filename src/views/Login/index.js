@@ -20,10 +20,17 @@ const Login = ({ navigation }) => {
     const [password, setPassword] = useState('');
     // const [isLoading, setIsLoading] = useState(true);
 
+    const clearstorage = async () => {
+         await AsyncStorage.clear()   
+    }
+
     useEffect(()=> {
         try {
+          clearstorage()
           const value = AsyncStorage.getItem('userData');
-          if (value !== null) {
+          console.log(value)
+        //   yaha pe !== ayega next line mai
+          if (value == null) {
             navigation.navigate('Home');
           }
         } catch (e) {
@@ -49,51 +56,61 @@ const Login = ({ navigation }) => {
 
 
     const loginInHandler = async () => {
-        if (email) {
-            if (password) {
-                const data = {
-                    email: email,
-                    password: password
-                };
-                try {
-                    // setIsLoading(true);
-                    var results = await api.loginUser(data);
-                    console.log(results.Message);
-                    if (results) {
-                        // setIsLoading(false);
-                        if (results?.Message == 'Not Verified') {
-                            navigation.navigate('EmailVerification', { email: email });
-                        }
-                        else {
-                            try {
-                                await AsyncStorage.setItem('userData', results.userInfo);
-                              } catch (e) {
-                                console.log(e);
-                              }
-                            dispatch(isLogged(results.userInfo));
-                            navigation.navigate('Home');
-                        }
-                    }
-                } catch (err) {
-                    console.log(err);
-                    showMessage({
-                        message: err.message,
-                        type: 'danger'
-                    });
-                }
-            } else {
-                showMessage({
-                    message: 'Password Required !!',
-                    type: 'danger'
-                });
-            }
+        // if (email) {
+        //     if (password) {
+        //         const data = {
+        //             email: email,
+        //             password: password
+        //         };
+        //         try {
+        //             // setIsLoading(true);
+        //             var results = await api.loginUser(data);
+        //             console.log(results.Message);
+        //             if (results) {
+        //                 // setIsLoading(false);
+        //                 if (results?.Message == 'Not Verified') {
+        //                     navigation.navigate('EmailVerification', { email: email });
+        //                 }
+        //                 else {
+        //                     try {
+        //                         await AsyncStorage.setItem('userData', results.userInfo);
+        //                       } catch (e) {
+        //                         console.log(e);
+        //                       }
+        //                     dispatch(isLogged(results.userInfo));
+        //                     navigation.navigate('Home');
+        //                 }
+        //             }
+        //         } catch (err) {
+        //             console.log(err);
+        //             showMessage({
+        //                 message: err.message,
+        //                 type: 'danger'
+        //             });
+        //         }
+        //     } else {
+        //         showMessage({
+        //             message: 'Password Required !!',
+        //             type: 'danger'
+        //         });
+        //     }
 
-        } else {
+        // } else {
+        //     showMessage({
+        //         message: 'Username Required !!',
+        //         type: 'danger'
+        //     });
+        // }
+        if(!email && !password){
             showMessage({
-                message: 'Username Required !!',
+                message: 'Enter Username and Password',
                 type: 'danger'
-            });
+            })
         }
+        else{
+            navigation.navigate('Home');
+        }
+        
 
     }
     return (

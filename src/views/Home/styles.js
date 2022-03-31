@@ -101,6 +101,7 @@ export default styles = StyleSheet.create({
         backgroundColor: '#F5F5F5',
         padding: 30,
         height: '100%',
+        width: '100%'
 
     }
 });
