@@ -35,6 +35,7 @@ export default function PickupLocation({ navigation }, props) {
   };
 
   const confirmPickupHandler = () => {
+      navigation.navigate('RequestVehicle');
   };
 
   const searchResults = (search) => {
