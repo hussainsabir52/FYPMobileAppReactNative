@@ -41,7 +41,7 @@ const Map = ({ location }) => {
         }
         showsUserLocation={true}>
         {/* {location&&<Marker coordinate={location} image></Marker>} */}
-        <Marker coordinate={location ? location : latlong}/>
+        <Marker coordinate={location ? location : latlong} />
       </MapView>
     </View>
   );
