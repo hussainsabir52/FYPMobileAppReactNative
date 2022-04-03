@@ -43,7 +43,9 @@ export default function PickupLocation({ navigation }, props) {
     setBSheight(850);
   };
 
-  const confirmPickupHandler = () => {};
+  const confirmPickupHandler = () => {
+      navigation.navigate('RequestVehicle');
+  };
 
   const searchResults = (search) => {
     setSearch(search);

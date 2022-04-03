@@ -10,6 +10,7 @@ import EmailVerificationSuccess from "../views/EmailVerificationSuccess";
 import Startup from "../views/Startup";
 import DropoffLocation from "../views/DropoffLocation/index.";
 import PickupLocation from "../views/PickupLocation";
+import RequestVehicle from "../views/RequestVehicle";
 
 const AuthStack = createNativeStackNavigator();
 const AuthNavigator = () => {
@@ -23,6 +24,7 @@ const AuthNavigator = () => {
             <AuthStack.Screen name="Home" component={Home} options={{ header: () => null }} />
             <AuthStack.Screen name="Dropoff" component={DropoffLocation} options={{ header: () => null }} />
             <AuthStack.Screen name="Pickup" component={PickupLocation} options={{ header: () => null }} />
+            <AuthStack.Screen name="RequestVehicle" component={RequestVehicle} options={{ header: () => null }} />
         </AuthStack.Navigator>
     )
 }
