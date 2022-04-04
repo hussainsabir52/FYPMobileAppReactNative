@@ -126,16 +126,12 @@ export default function DropoffLocation({ navigation }, props) {
 
         <View style={styles.ConfirmButton}>
           <Button
-            title="Confirm Dropoff"
-            onPress={confirmDropoffHandler}
+            title="Confirm Dropoff
+          "
             color="#FEDB29"
-            disabled={buttonDisabled}></Button>
-          {/* <TouchableOpacity
             onPress={confirmDropoffHandler}
             disabled={buttonDisabled}
-            style={styles.ConfirmButton}>
-            <Text>Confirm Dropoff</Text>
-          </TouchableOpacity> */}
+          />
         </View>
       </View>
 
@@ -148,7 +144,7 @@ export default function DropoffLocation({ navigation }, props) {
         height={BSheight}
         customStyles={styles.RBsheet}>
         <Text style={styles.textbox}>Where do you want to go?</Text>
-        <View style={{ marginTop: 20 }}>
+        <View style={{ marginTop: 10 }}>
           <SearchBar
             lightTheme={true}
             containerStyle={styles.searchBar}
