@@ -39,9 +39,14 @@ const Map = ({ location }) => {
             ? { ...location, latitudeDelta: 0.015, longitudeDelta: 0.0121 }
             : latlong
         }
-        showsUserLocation={true}>
+        showsUserLocation={true}
+        showsMyLocationButton={true}>
         {/* {location&&<Marker coordinate={location} image></Marker>} */}
-        <Marker coordinate={location ? location : latlong} />
+        <Marker
+          coordinate={location ? location : latlong}
+          pinColor={'black'}
+          draggable
+        />
       </MapView>
     </View>
   );

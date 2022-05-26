@@ -164,9 +164,10 @@ export default function DropoffLocation({ navigation }, props) {
             <Text key={i} style={{height: 500, width: 400, marginTop: '50%'}}>{suggestion.Location}</Text>
           })} */}
           <FlatList
+            style={{ color: '#000000' }}
             data={suggestions}
-            renderItem={renderItem}
             keyExtractor={() => Math.random(10000)}
+            renderItem={renderItem}
           />
         </View>
       </RBSheet>

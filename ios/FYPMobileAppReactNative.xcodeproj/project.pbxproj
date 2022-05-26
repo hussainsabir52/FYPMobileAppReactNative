@@ -31,6 +31,10 @@
 		0AF75C01F3B24755B5A76337 /* NotoSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B68CCFEB15042C28443BD0D /* NotoSans-SemiBold.ttf */; };
 		11A320A3B01C45278769AD8E /* Laila-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B766D4861044CF9BA04ED23 /* Laila-Bold.ttf */; };
 		BEDD61AAEB7141249968F335 /* Laila-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C52A41401B8A4AC880A4D9EB /* Laila-Medium.ttf */; };
+		C16647050CFC4C949A916F49 /* Signika-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6B2FB217DC6842FEAFFD38DD /* Signika-Regular.ttf */; };
+		A7091D5E427C4601A53AC85F /* Ubuntu-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69EC3661330940FE881D0843 /* Ubuntu-Regular.ttf */; };
+		305A3BC7D5384626B49A512D /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E09F19C6A097430ABDA13260 /* Inter-Bold.ttf */; };
+		9F808D86ED504E2CA1C2C3E9 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1958101764334036B93F7764 /* Inter-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +78,10 @@
 		9B68CCFEB15042C28443BD0D /* NotoSans-SemiBold.ttf */ = {isa = PBXFileReference; name = "NotoSans-SemiBold.ttf"; path = "../assets/fonts/NotoSans-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		8B766D4861044CF9BA04ED23 /* Laila-Bold.ttf */ = {isa = PBXFileReference; name = "Laila-Bold.ttf"; path = "../assets/fonts/Laila-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		C52A41401B8A4AC880A4D9EB /* Laila-Medium.ttf */ = {isa = PBXFileReference; name = "Laila-Medium.ttf"; path = "../assets/fonts/Laila-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6B2FB217DC6842FEAFFD38DD /* Signika-Regular.ttf */ = {isa = PBXFileReference; name = "Signika-Regular.ttf"; path = "../assets/fonts/Signika-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		69EC3661330940FE881D0843 /* Ubuntu-Regular.ttf */ = {isa = PBXFileReference; name = "Ubuntu-Regular.ttf"; path = "../assets/fonts/Ubuntu-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E09F19C6A097430ABDA13260 /* Inter-Bold.ttf */ = {isa = PBXFileReference; name = "Inter-Bold.ttf"; path = "../assets/fonts/Inter-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1958101764334036B93F7764 /* Inter-Regular.ttf */ = {isa = PBXFileReference; name = "Inter-Regular.ttf"; path = "../assets/fonts/Inter-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +193,10 @@
 				9B68CCFEB15042C28443BD0D /* NotoSans-SemiBold.ttf */,
 				8B766D4861044CF9BA04ED23 /* Laila-Bold.ttf */,
 				C52A41401B8A4AC880A4D9EB /* Laila-Medium.ttf */,
+				6B2FB217DC6842FEAFFD38DD /* Signika-Regular.ttf */,
+				69EC3661330940FE881D0843 /* Ubuntu-Regular.ttf */,
+				E09F19C6A097430ABDA13260 /* Inter-Bold.ttf */,
+				1958101764334036B93F7764 /* Inter-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -299,6 +311,10 @@
 				0AF75C01F3B24755B5A76337 /* NotoSans-SemiBold.ttf in Resources */,
 				11A320A3B01C45278769AD8E /* Laila-Bold.ttf in Resources */,
 				BEDD61AAEB7141249968F335 /* Laila-Medium.ttf in Resources */,
+				C16647050CFC4C949A916F49 /* Signika-Regular.ttf in Resources */,
+				A7091D5E427C4601A53AC85F /* Ubuntu-Regular.ttf in Resources */,
+				305A3BC7D5384626B49A512D /* Inter-Bold.ttf in Resources */,
+				9F808D86ED504E2CA1C2C3E9 /* Inter-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

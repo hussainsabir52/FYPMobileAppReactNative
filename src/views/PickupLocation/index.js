@@ -14,7 +14,7 @@ import { SearchBar } from 'react-native-elements';
 import Map from '../../components/Map';
 import Data from './Data';
 import styles from './styles';
-export default function PickupLocation({ navigation }, props) {
+export default function PickupLocation({ navigation }, nextNavigate) {
   const [search, setSearch] = useState('');
   const [BSheight, setBSheight] = useState(150);
   const [sdata, setSdata] = useState([]);
@@ -44,7 +44,7 @@ export default function PickupLocation({ navigation }, props) {
   };
 
   const confirmPickupHandler = () => {
-      navigation.navigate('RequestVehicle');
+    navigation.navigate('RequestVehicle');
   };
 
   const searchResults = (search) => {

@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import colors from '../../../assets/colors/color';
 
 export default StyleSheet.create({
   requestvehicle: {
@@ -85,10 +86,10 @@ export default StyleSheet.create({
     borderBottomWidth: 1,
   },
   fareInput: {
-    height: '30%',
     width: '95%',
     color: 'black',
     backgroundColor: '#EFEFEF',
+    marginBottom: 10,
   },
   ConfirmVehicle: {
     //backgroundColor: '#000000',
@@ -96,10 +97,45 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
+  pickndropContainer: {
+    flexDirection: 'row',
+    marginLeft: 20,
+
+    flex: 1,
+    marginTop: 10,
+  },
+  pointers: {},
+  pickndropText: {
+    fontFamily: 'NotoSans-SemiBold',
+    fontSize: 12,
+    color: '#9B9B9B',
+    marginTop: -5,
+  },
+  location: {
+    fontFamily: 'NotoSans-SemiBold',
+    fontSize: 12,
+    color: colors.black,
+    marginTop: -5,
+  },
+  pickndropWrapper: {
+    flexDirection: 'column',
+    marginLeft: 13,
+  },
+  pickupWrapper: {},
+  DropoffWrapper: {
+    marginTop: 15,
+  },
   btnConfirm: {
-    height: 50,
-    paddingVertical: 20,
-    padding: 20,
-    width: '70%',
+    backgroundColor: colors.yellow,
+    paddingVertical: 10,
+    paddingHorizontal: 100,
+    marginBottom: 20,
+    borderRadius: 30,
+  },
+  btnText: {
+    color: colors.black,
+    fontFamily: 'NotoSans-SemiBold',
+    fontSize: 18,
   },
 });

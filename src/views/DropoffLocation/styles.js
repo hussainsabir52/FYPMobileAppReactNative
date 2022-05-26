@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StatusBar, StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   container: {
@@ -8,7 +8,8 @@ export default StyleSheet.create({
     height: '100%',
   },
   buttonsContainer: {
-    marginTop: '2%',
+    //marginTop: StatusBar.currentHeight,
+    marginTop: '5%',
     marginBottom: '190%',
     //marginRight: '60%',
     width: '100%',
