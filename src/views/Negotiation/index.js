@@ -20,27 +20,6 @@ import { setNegotiatedFare } from '../../actions/negotiatedFare';
 import axios from 'axios';
 import { parse } from 'react-native-svg';
 
-const tempData = [
-  {
-    driver_name: 'Mustaali Hussain',
-    make: 'Honda Civic',
-    vehicleNumber: 'GJA424',
-    driver_fare: 400,
-  },
-  {
-    driver_name: 'Muhammad Hasan',
-    make: 'Land Cruiser Prado',
-    vehicleNumber: 'GJA424',
-    driver_fare: 400,
-  },
-  {
-    driver_name: 'Hussain',
-    make: 'Honda City',
-    vehicleNumber: 'GJA424',
-    driver_fare: 400,
-  },
-];
-
 const Negotiation = ({ navigation }) => {
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
@@ -129,7 +108,7 @@ const Negotiation = ({ navigation }) => {
             <Text style={styles.amountText}>PKR</Text>
           </View>
           <View style={styles.buttonContainer}>
-            <TouchableOpacity onPress={offerAcceptHandler}>
+            <TouchableOpacity onPress={() => {offerAcceptHandler(item.driverID, item.driver_fare)}}>
               <Feather
                 name="check"
                 color={'#000000'}
@@ -324,7 +303,7 @@ const Negotiation = ({ navigation }) => {
           </View>
         </View> */}
       <FlatList
-        data={tempData}
+        data={dData}
         renderItem={renderItem}
         keyExtractor={() => Math.random(10000)}
       />
