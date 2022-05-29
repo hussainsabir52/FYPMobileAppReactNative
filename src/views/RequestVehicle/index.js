@@ -13,20 +13,46 @@ import Map from '../../components/Map';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import styles from './styles';
 import { faBorderStyle } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFare, setVehicleId } from '../../actions/rideNowRequest';
+import { setRideId } from '../../actions/negotiatedFare';
 
 import colors from '../../../assets/colors/color';
 import { color } from 'react-native-reanimated';
 import { NavigationContainer } from '@react-navigation/native';
+import axios from 'axios';
 export default function RequestVehicle({ navigation }) {
+  const {user_id ,dropoff_id, pickup_id, fare, vehicle_typeID} = useSelector((state) => state.rideNowRequest);
+  const rideReq = {
+    'user_id': user_id,
+    'from_location': pickup_id,
+    'to_location': dropoff_id,
+    'fare': fare,
+    'vehicle_type': vehicle_typeID
+  }
   const [fareValue, setFareValue] = useState('');
-
+  const dispatch = useDispatch();
   const refRBSheet = useRef();
   useEffect(() => {
     refRBSheet.current.open();
   });
-  const confirmRideHandler = () => {
-    navigation.navigate('Negotiation');
+  const vehicleTypeHandler = (typeID) => {
+    dispatch(setVehicleId(typeID));
+  }
+  const confirmRideHandler = async () => {
+    axios.post('https://conveygo-microservice.herokuapp.com/v1/ride-now', rideReq).then(
+      (res)=>{
+        dispatch(setRideId(res.data?.rideId))
+        console.log(res.data?.rideId);
+        navigation.navigate('Negotiation');
+      }
+    );
+    
   };
+  const fareHandler = (value) => {
+    setFareValue(value);
+    dispatch(setFare(value));
+  };  
   return (
     <View
       style={{
@@ -57,31 +83,31 @@ export default function RequestVehicle({ navigation }) {
                 style={[
                   styles.vehicleCard,
                   { backgroundColor: colors.yellow },
-                ]}>
+                ]} onPress={() => {vehicleTypeHandler(1)}}>
                 <Image
                   source={require('../../../images/EcoCar.png')}
                   style={[styles.vehicleCardImg, styles.EcoImg]}></Image>
                 <Text style={styles.vehicleCardText}>Eco</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.vehicleCard}>
+              <TouchableOpacity style={styles.vehicleCard} onPress={() => {vehicleTypeHandler(2)}}>
                 <Image
                   source={require('../../../images/StandardCar.png')}
                   style={styles.vehicleCardImg}></Image>
                 <Text style={styles.vehicleCardText}>Standard</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.vehicleCard}>
+              </TouchableOpacity >
+              <TouchableOpacity style={styles.vehicleCard} onPress={() => {vehicleTypeHandler(3)}}>
                 <Image
                   source={require('../../../images/PremiumCar.png')}
                   style={styles.vehicleCardImg}></Image>
                 <Text style={styles.vehicleCardText}>Premium</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.vehicleCard}>
+              <TouchableOpacity style={styles.vehicleCard} onPress={() => {vehicleTypeHandler(5)}}>
                 <Image
                   source={require('../../../images/Bike.png')}
                   style={[styles.vehicleCardImg, styles.BikeImg]}></Image>
                 <Text style={styles.vehicleCardText}>Bike</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.vehicleCard}>
+              <TouchableOpacity style={styles.vehicleCard} onPress={() => {vehicleTypeHandler(4)}}>
                 <Image
                   source={require('../../../images/Auto.png')}
                   style={[styles.vehicleCardImg, styles.AutoImg]}></Image>
@@ -99,7 +125,7 @@ export default function RequestVehicle({ navigation }) {
             placeholder="Enter Your Fare"
             placeholderTextColor="#9F9F9F"
             placeholderStyle={styles.placeholder}
-            onChangeText={setFareValue}
+            onChangeText={(value) => {fareHandler(value)}}
             keyboardType="numeric"></TextInput>
         </View>
         <View style={styles.hr} />

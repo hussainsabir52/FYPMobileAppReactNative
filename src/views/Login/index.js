@@ -8,13 +8,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../components/Button';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './styles';
+import { setUserId } from '../../actions/rideNowRequest';
 
 import api from '../../services/api'
 // import { getStateFromPath } from '@react-navigation/native';
 
 
 const Login = ({ navigation }) => {
-
+    const user = useSelector((state) => state.isLogged);
     const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -56,60 +57,63 @@ const Login = ({ navigation }) => {
 
 
     const loginInHandler = async () => {
-        // if (email) {
-        //     if (password) {
-        //         const data = {
-        //             email: email,
-        //             password: password
-        //         };
-        //         try {
-        //             // setIsLoading(true);
-        //             var results = await api.loginUser(data);
-        //             console.log(results.Message);
-        //             if (results) {
-        //                 // setIsLoading(false);
-        //                 if (results?.Message == 'Not Verified') {
-        //                     navigation.navigate('EmailVerification', { email: email });
-        //                 }
-        //                 else {
-        //                     try {
-        //                         await AsyncStorage.setItem('userData', results.userInfo);
-        //                       } catch (e) {
-        //                         console.log(e);
-        //                       }
-        //                     dispatch(isLogged(results.userInfo));
-        //                     navigation.navigate('Home');
-        //                 }
-        //             }
-        //         } catch (err) {
-        //             console.log(err);
-        //             showMessage({
-        //                 message: err.message,
-        //                 type: 'danger'
-        //             });
-        //         }
-        //     } else {
-        //         showMessage({
-        //             message: 'Password Required !!',
-        //             type: 'danger'
-        //         });
-        //     }
+        if (email) {
+            if (password) {
+                const data = {
+                    email: email,
+                    password: password
+                };
+                try {
+                    // setIsLoading(true);
+                    var results = await api.loginUser(data);
+                    console.log(results.Message);
+                    if (results) {
+                        // setIsLoading(false);
+                        if (results?.Message == 'Not Verified') {
+                            navigation.navigate('EmailVerification', { email: email });
+                        }
+                        else {
+                            try {
+                                await AsyncStorage.setItem('userData', results.userInfo);
+                              } catch (e) {
+                                console.log(e);
+                              }
+                            dispatch(isLogged(results.userInfo));
+                            dispatch(setUserId(results.userInfo.userID));
+                            console.log("This is user data from redux " + user);
+                            console.log(user);
+                            navigation.navigate('Home');
+                        }
+                    }
+                } catch (err) {
+                    console.log(err);
+                    showMessage({
+                        message: err.message,
+                        type: 'danger'
+                    });
+                }
+            } else {
+                showMessage({
+                    message: 'Password Required !!',
+                    type: 'danger'
+                });
+            }
 
-        // } else {
-        //     showMessage({
-        //         message: 'Username Required !!',
-        //         type: 'danger'
-        //     });
-        // }
-        if(!email && !password){
+        } else {
             showMessage({
-                message: 'Enter Username and Password',
+                message: 'Username Required !!',
                 type: 'danger'
-            })
+            });
         }
-        else{
-            navigation.navigate('Home');
-        }
+        // if(!email && !password){
+        //     showMessage({
+        //         message: 'Enter Username and Password',
+        //         type: 'danger'
+        //     })
+        // }
+        // else{
+        //     navigation.navigate('Home');
+        // }
         
 
     }

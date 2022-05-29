@@ -14,6 +14,8 @@ import { SearchBar } from 'react-native-elements';
 import Map from '../../components/Map';
 import Data from './Data';
 import styles from './styles';
+import { useDispatch, useSelector } from 'react-redux';
+import { setDropoffId } from '../../actions/rideNowRequest';
 export default function DropoffLocation({ navigation }, props) {
   const [search, setSearch] = useState('');
   const [BSheight, setBSheight] = useState(150);
@@ -22,16 +24,18 @@ export default function DropoffLocation({ navigation }, props) {
   const [location, setLocation] = useState(null);
   const [buttonDisabled, setbuttonDisabled] = useState(true);
 
+  const locations = useSelector((state) => state.locationList);
+  const dispatch = useDispatch();
   useEffect(() => {
     fetchdata();
   }, []);
   const fetchdata = async () => {
     try {
       //const res = require('./Data.json');
-      setSdata(Data);
-      console.log(sdata);
+      setSdata(locations);
+      // console.log(sdata);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
   const refRBSheet = useRef();
@@ -49,20 +53,24 @@ export default function DropoffLocation({ navigation }, props) {
 
   const searchResults = (search) => {
     setSearch(search);
-    console.log(sdata);
+    // console.log(sdata);
     let matches = sdata.filter((loc) => {
       const regex = new RegExp(`^${search}`, 'gi');
-      return loc.Location.match(regex);
+      return loc.address.match(regex);
     });
 
     if (search.length === 0) {
       matches = [];
     }
+    console.log("This is matchers");
     console.log(matches);
     setSuggestions(matches);
+    console.log("This is suggestions");
+    console.log(suggestions);
   };
 
   const selectLocation = (item) => {
+    dispatch(setDropoffId(item.locId));
     setLocation(item);
     refRBSheet.current.close();
     setbuttonDisabled(false);
@@ -79,8 +87,9 @@ export default function DropoffLocation({ navigation }, props) {
           paddingTop: 10,
           paddingBottom: 10,
           fontSize: 20,
+          color: 'black'
         }}>
-        {item.Location}
+        {item.address}
       </Text>
     </Pressable>
   );
@@ -93,8 +102,8 @@ export default function DropoffLocation({ navigation }, props) {
       <Map
         location={
           location && {
-            longitude: location['Longitude'],
-            latitude: location['Latitude'],
+            longitude: location['longitude'],
+            latitude: location['latitude'],
           }
         }
       />
@@ -164,7 +173,7 @@ export default function DropoffLocation({ navigation }, props) {
             <Text key={i} style={{height: 500, width: 400, marginTop: '50%'}}>{suggestion.Location}</Text>
           })} */}
           <FlatList
-            style={{ color: '#000000' }}
+            style={{ color: '#FFFFFF' }}
             data={suggestions}
             keyExtractor={() => Math.random(10000)}
             renderItem={renderItem}

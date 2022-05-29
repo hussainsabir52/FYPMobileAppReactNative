@@ -14,6 +14,8 @@ import { SearchBar } from 'react-native-elements';
 import Map from '../../components/Map';
 import Data from './Data';
 import styles from './styles';
+import { useDispatch, useSelector } from 'react-redux';
+import { setPickupId } from '../../actions/rideNowRequest';
 export default function PickupLocation({ navigation }, nextNavigate) {
   const [search, setSearch] = useState('');
   const [BSheight, setBSheight] = useState(150);
@@ -22,16 +24,21 @@ export default function PickupLocation({ navigation }, nextNavigate) {
   const [location, setLocation] = useState(null);
   const [buttonDisabled, setbuttonDisabled] = useState(true);
 
+  const {rideNow, Delivery} = useSelector((state) => state.rideType);
+
+  const locations = useSelector((state) => state.locationList);
+
+  const dispatch = useDispatch();  
   useEffect(() => {
     fetchdata();
   }, []);
   const fetchdata = async () => {
     try {
       //const res = require('./Data.json');
-      setSdata(Data);
-      console.log(sdata);
+      setSdata(locations);
+      // console.log(sdata);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
   const refRBSheet = useRef();
@@ -44,7 +51,15 @@ export default function PickupLocation({ navigation }, nextNavigate) {
   };
 
   const confirmPickupHandler = () => {
-    navigation.navigate('RequestVehicle');
+    console.log("this is ridenow and delivery");
+    console.log(rideNow, Delivery);
+    if (rideNow == true){
+      navigation.navigate('RequestVehicle');
+    }
+    else if (Delivery == true){
+      navigation.navigate('Delivery');
+    }
+    
   };
 
   const searchResults = (search) => {
@@ -52,7 +67,7 @@ export default function PickupLocation({ navigation }, nextNavigate) {
     console.log(sdata);
     let matches = sdata.filter((loc) => {
       const regex = new RegExp(`^${search}`, 'gi');
-      return loc.Location.match(regex);
+      return loc.address.match(regex);
     });
 
     if (search.length === 0) {
@@ -63,6 +78,7 @@ export default function PickupLocation({ navigation }, nextNavigate) {
   };
 
   const selectLocation = (item) => {
+    dispatch(setPickupId(item.locId));
     setLocation(item);
     refRBSheet.current.close();
     setbuttonDisabled(false);
@@ -79,8 +95,9 @@ export default function PickupLocation({ navigation }, nextNavigate) {
           paddingTop: 10,
           paddingBottom: 10,
           fontSize: 20,
+          color: 'black',
         }}>
-        {item.Location}
+        {item.address}
       </Text>
     </Pressable>
   );
@@ -93,8 +110,8 @@ export default function PickupLocation({ navigation }, nextNavigate) {
       <Map
         location={
           location && {
-            longitude: location['Longitude'],
-            latitude: location['Latitude'],
+            longitude: location['longitude'],
+            latitude: location['latitude'],
           }
         }
       />

@@ -9,6 +9,7 @@ import {
   Image,
   StatusBar,
 } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import styles from './styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -17,19 +18,35 @@ import Button from '../../components/Button';
 import { NavigationContainer } from '@react-navigation/native';
 import RNLocation from 'react-native-location';
 import Feather from 'react-native-vector-icons/Feather';
-
+import axios from 'axios';
 import colors from '../../../assets/colors/color';
+import { locationList } from '../../actions/locationList';
+import { setTypeRideNow, setTypeDelivery } from '../../actions/rideType';
 
 const Home = ({ navigation }) => {
+  dispatch = useDispatch();
+  const locs = useSelector((state) => state.locationList);
   const rideHandler = () => {
+    dispatch(setTypeRideNow());
     navigation.navigate('Dropoff');
   };
   const deliveryHandler = () => {
-    navigation.navigate('Delivery');
+    dispatch(setTypeDelivery());
+    navigation.navigate('Dropoff');
   };
   const monthlyContractHandler = () => {
     navigation.navigate('DatePick');
   };
+
+  useEffect(() => {
+    const fetchLocations = async () => {
+      const locations = await axios.get('https://conveygo-microservice.herokuapp.com/v1/locations');
+      dispatch(locationList(locations?.data));
+      console.log("this is location from api");
+      console.log(locs);
+    }
+    fetchLocations();
+  },[])
 
   useEffect(() => {
     console.log('use HELLO');
