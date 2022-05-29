@@ -41,8 +41,8 @@ export default styles = StyleSheet.create({
     flexDirection: 'column',
     marginLeft: 11,
     marginTop: 10,
-    borderRightWidth: 2,
-    borderColor: '#877FAE',
+    width: '55%',
+    // paddingRight: 40,
   },
   Name: {},
   NameText: {
@@ -60,6 +60,15 @@ export default styles = StyleSheet.create({
     marginTop: 5,
   },
   rating: {},
+  amountAndBtn: {
+    flexDirection: 'row',
+    position: 'absolute',
+    right: 1,
+    alignSelf: 'center',
+    borderLeftWidth: 2,
+    borderColor: '#877FAE',
+    paddingBottom: 10,
+  },
   amount: {
     alignSelf: 'center',
     marginLeft: 10,

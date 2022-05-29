@@ -131,11 +131,14 @@ export default StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 100,
     marginBottom: 20,
+    marginTop: 10,
     borderRadius: 30,
+    width: '95%',
   },
   btnText: {
     color: colors.black,
     fontFamily: 'NotoSans-SemiBold',
     fontSize: 18,
+    alignSelf: 'center',
   },
 });

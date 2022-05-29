@@ -7,6 +7,7 @@ import {
   Button,
   Image,
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 import React, { useState, useRef, useEffect } from 'react';
 import Map from '../../components/Map';
@@ -22,37 +23,43 @@ import { color } from 'react-native-reanimated';
 import { NavigationContainer } from '@react-navigation/native';
 import axios from 'axios';
 export default function RequestVehicle({ navigation }) {
-  const {user_id ,dropoff_id, pickup_id, fare, vehicle_typeID} = useSelector((state) => state.rideNowRequest);
+  const { user_id, dropoff_id, pickup_id, fare, vehicle_typeID } = useSelector(
+    (state) => state.rideNowRequest,
+  );
   const rideReq = {
-    'user_id': user_id,
-    'from_location': pickup_id,
-    'to_location': dropoff_id,
-    'fare': fare,
-    'vehicle_type': vehicle_typeID
-  }
+    user_id: user_id,
+    from_location: pickup_id,
+    to_location: dropoff_id,
+    fare: fare,
+    vehicle_type: vehicle_typeID,
+  };
   const [fareValue, setFareValue] = useState('');
+  const [vehiclebtn, setVehiclebtn] = useState('');
+  const [isloader, setisloader] = useState(false);
   const dispatch = useDispatch();
   const refRBSheet = useRef();
   useEffect(() => {
     refRBSheet.current.open();
   });
   const vehicleTypeHandler = (typeID) => {
+    setVehiclebtn(typeID);
     dispatch(setVehicleId(typeID));
-  }
+  };
   const confirmRideHandler = async () => {
-    axios.post('https://conveygo-microservice.herokuapp.com/v1/ride-now', rideReq).then(
-      (res)=>{
-        dispatch(setRideId(res.data?.rideId))
+    setisloader(true);
+    axios
+      .post('https://conveygo-microservice.herokuapp.com/v1/ride-now', rideReq)
+      .then((res) => {
+        dispatch(setRideId(res.data?.rideId));
+        setisloader(false);
         console.log(res.data?.rideId);
         navigation.navigate('Negotiation');
-      }
-    );
-    
+      });
   };
   const fareHandler = (value) => {
     setFareValue(value);
     dispatch(setFare(value));
-  };  
+  };
   return (
     <View
       style={{
@@ -82,32 +89,78 @@ export default function RequestVehicle({ navigation }) {
               <TouchableOpacity
                 style={[
                   styles.vehicleCard,
-                  { backgroundColor: colors.yellow },
-                ]} onPress={() => {vehicleTypeHandler(1)}}>
+                  {
+                    backgroundColor:
+                      vehiclebtn === 1 ? colors.yellow : '#F5E9A6',
+                  },
+                ]}
+                onPress={() => {
+                  vehicleTypeHandler(1);
+                }}>
                 <Image
                   source={require('../../../images/EcoCar.png')}
                   style={[styles.vehicleCardImg, styles.EcoImg]}></Image>
                 <Text style={styles.vehicleCardText}>Eco</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.vehicleCard} onPress={() => {vehicleTypeHandler(2)}}>
+              <TouchableOpacity
+                style={[
+                  styles.vehicleCard,
+                  {
+                    backgroundColor:
+                      vehiclebtn === 2 ? colors.yellow : '#F5E9A6',
+                  },
+                ]}
+                onPress={() => {
+                  vehicleTypeHandler(2);
+                }}>
                 <Image
                   source={require('../../../images/StandardCar.png')}
                   style={styles.vehicleCardImg}></Image>
                 <Text style={styles.vehicleCardText}>Standard</Text>
-              </TouchableOpacity >
-              <TouchableOpacity style={styles.vehicleCard} onPress={() => {vehicleTypeHandler(3)}}>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.vehicleCard,
+                  {
+                    backgroundColor:
+                      vehiclebtn === 3 ? colors.yellow : '#F5E9A6',
+                  },
+                ]}
+                onPress={() => {
+                  vehicleTypeHandler(3);
+                }}>
                 <Image
                   source={require('../../../images/PremiumCar.png')}
                   style={styles.vehicleCardImg}></Image>
                 <Text style={styles.vehicleCardText}>Premium</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.vehicleCard} onPress={() => {vehicleTypeHandler(5)}}>
+              <TouchableOpacity
+                style={[
+                  styles.vehicleCard,
+                  {
+                    backgroundColor:
+                      vehiclebtn === 5 ? colors.yellow : '#F5E9A6',
+                  },
+                ]}
+                onPress={() => {
+                  vehicleTypeHandler(5);
+                }}>
                 <Image
                   source={require('../../../images/Bike.png')}
                   style={[styles.vehicleCardImg, styles.BikeImg]}></Image>
                 <Text style={styles.vehicleCardText}>Bike</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.vehicleCard} onPress={() => {vehicleTypeHandler(4)}}>
+              <TouchableOpacity
+                style={[
+                  styles.vehicleCard,
+                  {
+                    backgroundColor:
+                      vehiclebtn === 4 ? colors.yellow : '#F5E9A6',
+                  },
+                ]}
+                onPress={() => {
+                  vehicleTypeHandler(4);
+                }}>
                 <Image
                   source={require('../../../images/Auto.png')}
                   style={[styles.vehicleCardImg, styles.AutoImg]}></Image>
@@ -125,7 +178,9 @@ export default function RequestVehicle({ navigation }) {
             placeholder="Enter Your Fare"
             placeholderTextColor="#9F9F9F"
             placeholderStyle={styles.placeholder}
-            onChangeText={(value) => {fareHandler(value)}}
+            onChangeText={(value) => {
+              fareHandler(value);
+            }}
             keyboardType="numeric"></TextInput>
         </View>
         <View style={styles.hr} />
@@ -153,7 +208,17 @@ export default function RequestVehicle({ navigation }) {
           <TouchableOpacity
             style={styles.btnConfirm}
             onPress={confirmRideHandler}>
-            <Text style={styles.btnText}>Confirm Your Ride</Text>
+            <Text style={styles.btnText}>
+              {isloader ? (
+                <ActivityIndicator
+                  size="large"
+                  color="#000000"
+                  style={styles.btnText}
+                />
+              ) : (
+                'Confirm Your Ride'
+              )}
+            </Text>
           </TouchableOpacity>
         </View>
       </RBSheet>
