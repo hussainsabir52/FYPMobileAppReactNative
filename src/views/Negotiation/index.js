@@ -22,24 +22,24 @@ import { parse } from 'react-native-svg';
 
 const tempData = [
   {
-    'driver_name': 'Mustaali',
-    'make': 'Honda City',
-    'vehicleNumber': 'GJA424',
-    'fare': 400
+    driver_name: 'Mustaali Hussain',
+    make: 'Honda Civic',
+    vehicleNumber: 'GJA424',
+    driver_fare: 400,
   },
   {
-    'driver_name': 'Mustaali',
-    'make': 'Honda City',
-    'vehicleNumber': 'GJA424',
-    'fare': 400
+    driver_name: 'Muhammad Hasan',
+    make: 'Land Cruiser Prado',
+    vehicleNumber: 'GJA424',
+    driver_fare: 400,
   },
   {
-    'driver_name': 'Mustaali',
-    'make': 'Honda City',
-    'vehicleNumber': 'GJA424',
-    'fare': 400
+    driver_name: 'Hussain',
+    make: 'Honda City',
+    vehicleNumber: 'GJA424',
+    driver_fare: 400,
   },
-]
+];
 
 const Negotiation = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -47,10 +47,12 @@ const Negotiation = ({ navigation }) => {
   const [showView, setShowView] = useState(true);
   const [dData, setDData] = useState([]);
   const [refreshButton, setRefreshButton] = useState(false);
-  const [initailFare, setInitialFare] = useState(useSelector((state) => state.rideNowRequest.fare));
+  const [initailFare, setInitialFare] = useState(
+    useSelector((state) => state.rideNowRequest.fare),
+  );
   const rideID = useSelector((state) => state.negotiatedFare.rideID);
   const RIDEID = {
-    'ride_id': rideID
+    ride_id: rideID,
   };
   const NEGOTIATEDFARE = {
     'ride_id': rideID,
@@ -70,52 +72,80 @@ const Negotiation = ({ navigation }) => {
     navigation.navigate('Arriving');
   };
   const negativeHandler = () => {
-    setInitialFare(parseInt(initailFare)-10);
-  }
+    setInitialFare(parseInt(initailFare) - 10);
+  };
   const positiveHandler = () => {
-    setInitialFare(parseInt(initailFare)+10);
-  }
+    setInitialFare(parseInt(initailFare) + 10);
+  };
   const negotiateHandler = () => {
     setModalVisible(!modalVisible);
     dispatch(setNegotiatedFare(initailFare));
-    axios.post('https://conveygo-microservice.herokuapp.com/v1/user-fare', NEGOTIATEDFARE).then(
-      (res)=>{
+    axios
+      .post(
+        'https://conveygo-microservice.herokuapp.com/v1/user-fare',
+        NEGOTIATEDFARE,
+      )
+      .then((res) => {
         console.log(res.data);
-      }
-    );
-  }
+      });
+  };
 
   const refreshHandler = async () => {
     setRefreshButton(true);
-    axios.post('https://conveygo-microservice.herokuapp.com/v1/get-drivers', RIDEID).then(
-      (res)=>{
+    axios
+      .post(
+        'https://conveygo-microservice.herokuapp.com/v1/get-drivers',
+        RIDEID,
+      )
+      .then((res) => {
         console.log(res.data.drivers);
         setDData(res.data.drivers);
-      }
-    );
+      });
     setTimeout(() => {
       setRefreshButton(false);
-    }, 3000)
-  }
+    }, 3000);
+  };
 
   // useEffect(() => {
   //   setDData(useSelector((state) => state.driverData));
   // },[])
-  
-
 
   const renderItem = ({ item }) => (
-    <View style={{color: 'black', padding: 50}}>
-      <Text style={{color: 'black', fontSize: 20}}>{item.driver_name}</Text>
-      <Text style={{color: 'black', fontSize: 20}}>{item.make}</Text>
-      <Text style={{color: 'black', fontSize: 20}}>{item.vehicleNumber}</Text>
-      <Text style={{color: 'black', fontSize: 20}}>{item.driver_fare}</Text>
-      <TouchableOpacity onPress={() => setShowView(!showView)}>
-        <Text style={{color: 'red', fontSize: 20}}>X</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => {offerAcceptHandler(item.driverID, item.driver_fare)}}>
-      <Text style={{color: 'green', fontSize: 20}}>Y</Text>
-      </TouchableOpacity>
+    <View style={styles.offersContainer}>
+      <View style={styles.OfferWrapper}>
+        <View style={styles.NameVehicleWrapper}>
+          <View style={styles.Name}>
+            <Text style={styles.NameText}>{item.driver_name}</Text>
+          </View>
+          <View style={styles.Vehicle}>
+            <Text style={styles.VehicleText}>{item.make}</Text>
+            <Text style={styles.VehicleText}>{item.vehicleNumber}</Text>
+          </View>
+        </View>
+
+        <View style={styles.amountAndBtn}>
+          <View style={styles.amount}>
+            <Text style={styles.amountText}>{item.driver_fare}</Text>
+            <Text style={styles.amountText}>PKR</Text>
+          </View>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity onPress={offerAcceptHandler}>
+              <Feather
+                name="check"
+                color={'#000000'}
+                size={25}
+                style={styles.AcceptButton}></Feather>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setShowView(!showView)}>
+              <Feather
+                name="x"
+                color={'#FFFFFF'}
+                size={25}
+                style={styles.DeclineButton}></Feather>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
     </View>
   );
 
@@ -154,9 +184,7 @@ const Negotiation = ({ navigation }) => {
               </View>
             </View>
             <View>
-              <TouchableOpacity
-                onPress={negotiateHandler}
-                style={styles.Okbtn}>
+              <TouchableOpacity onPress={negotiateHandler} style={styles.Okbtn}>
                 <Text style={styles.OkbtnText}>OK</Text>
               </TouchableOpacity>
             </View>
@@ -174,7 +202,7 @@ const Negotiation = ({ navigation }) => {
         </TouchableOpacity>
         <Text style={styles.heading}>Driver's Offers</Text>
       </View>
-        {/* <View style={styles.offersContainer}>
+      {/* <View style={styles.offersContainer}>
           <View style={styles.OfferWrapper}>
             <View style={styles.userImg}>
               <Image
@@ -295,11 +323,11 @@ const Negotiation = ({ navigation }) => {
             </View>
           </View>
         </View> */}
-        <FlatList
-            data={dData}
-            renderItem={renderItem}
-            keyExtractor={() => Math.random(10000)}
-          />
+      <FlatList
+        data={tempData}
+        renderItem={renderItem}
+        keyExtractor={() => Math.random(10000)}
+      />
       <View>
         <TouchableOpacity
           style={styles.btnConfirm}
@@ -308,7 +336,8 @@ const Negotiation = ({ navigation }) => {
         </TouchableOpacity>
         <TouchableOpacity
           disabled={refreshButton}
-          style={styles.btnConfirm} onPress={refreshHandler}>
+          style={styles.btnConfirm}
+          onPress={refreshHandler}>
           <Text style={styles.btnText}>Refresh</Text>
         </TouchableOpacity>
       </View>
