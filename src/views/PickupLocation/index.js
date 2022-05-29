@@ -20,7 +20,7 @@ export default function PickupLocation({ navigation }, nextNavigate) {
   const [sdata, setSdata] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const [location, setLocation] = useState(null);
-  const [buttonDisabled, setbuttonDisabled] = useState(true);
+  const [ConfirmbtnShow, setConfirmbtnShow] = useState(false);
 
   useEffect(() => {
     fetchdata();
@@ -65,7 +65,7 @@ export default function PickupLocation({ navigation }, nextNavigate) {
   const selectLocation = (item) => {
     setLocation(item);
     refRBSheet.current.close();
-    setbuttonDisabled(false);
+    setConfirmbtnShow(true);
   };
 
   const renderItem = ({ item }) => (
@@ -119,19 +119,21 @@ export default function PickupLocation({ navigation }, nextNavigate) {
             title="Show Options"
             onPress={() => {
               refRBSheet.current.open();
+              setConfirmbtnShow(false);
               setBSheight(150);
             }}
           />
         </View>
 
-        <View style={styles.ConfirmButton}>
-          <Button
-            title="Confirm Pickup"
-            color="#FEDB29"
-            onPress={confirmPickupHandler}
-            disabled={buttonDisabled}
-          />
-        </View>
+        {ConfirmbtnShow && (
+          <View style={styles.ConfirmButton}>
+            <TouchableOpacity
+              onPress={confirmPickupHandler}
+              style={styles.btnConfirm}>
+              <Text style={styles.btnText}>Confirm Pickup</Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
 
       {/* <Button title="OPEN BOTTOM SHEET" onPress={() => refRBSheet.current.open()} /> */}

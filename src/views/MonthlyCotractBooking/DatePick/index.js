@@ -1,29 +1,20 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import styles from './styles';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import Feather from 'react-native-vector-icons/Feather';
 
 const DatePick = ({ navigation }) => {
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-
-  const showDatePicker = () => {
-    setDatePickerVisibility(true);
-  };
-
-  const hideDatePicker = () => {
-    setDatePickerVisibility(false);
-  };
-
-  const [startDate, setStartDate] = useState(new Date());
-  const [text, setText] = useState('');
-
-  const [endDate, setEndDate] = useState(new Date());
+  const [date, setDate] = useState(new Date());
+  // const [mode, setMode] = useState('date');
+  const [show1, setShow1] = useState(false);
+  const [show2, setShow2] = useState(false);
   const [text1, setText1] = useState('');
+  const [text2, setText2] = useState('');
 
-  const handleConfirm = (event, date) => {
-    const currentDate = date || startDate;
-    setStartDate(currentDate);
+  const onChange1 = (event, SelectedDate) => {
+    const currentDate = SelectedDate || date;
+    // setDate(currentDate);
     let tempDate = new Date(currentDate);
     let fDate =
       tempDate.getDate() +
@@ -31,28 +22,38 @@ const DatePick = ({ navigation }) => {
       (tempDate.getMonth() + 1) +
       '/' +
       tempDate.getFullYear();
-    setText(fDate);
-    console.log('A date has been picked: ', date);
-
-    if (isSelected2) {
-      const currentDate = date || endDate;
-      setEndDate(currentDate);
-      let tempDate = new Date(currentDate);
-      let fDate =
-        tempDate.getDate() +
-        '/' +
-        (tempDate.getMonth() + 1) +
-        '/' +
-        tempDate.getFullYear();
-      setText1(fDate);
-    }
-    hideDatePicker();
+    // let fTime =
+    //   'Hours: ' + tempDate.getHours() + '| Minutes: ' + tempDate.getMinutes();
+    setShow1(false);
+    setText1(fDate);
     setisSelected1(false);
     setisSelected2(true);
+    console.log('Start Date: ' + fDate);
   };
+  const onChange2 = (event, SelectedDate) => {
+    const currentDate = SelectedDate || date;
+    // setDate(currentDate);
+    let tempDate = new Date(currentDate);
+    let fDate =
+      tempDate.getDate() +
+      '/' +
+      (tempDate.getMonth() + 1) +
+      '/' +
+      tempDate.getFullYear();
+    // let fTime =
+    //   'Hours: ' + tempDate.getHours() + '| Minutes: ' + tempDate.getMinutes();
+    setShow2(false);
+    setText2(fDate);
+
+    console.log('End Date:' + fDate);
+  };
+
   const [isSelected1, setisSelected1] = useState(true);
   const [isSelected2, setisSelected2] = useState(false);
 
+  const DateConfirm = () => {
+    navigation.navigate('DaysOfWeek');
+  };
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -64,7 +65,7 @@ const DatePick = ({ navigation }) => {
       <View style={styles.center}>
         <View>
           <TouchableOpacity
-            onPress={showDatePicker}
+            onPress={() => setShow1(true)}
             style={[styles.DateCard, isSelected1 ? styles.SelectedCard : null]}>
             <Text
               style={[
@@ -77,7 +78,7 @@ const DatePick = ({ navigation }) => {
               style={{
                 flexDirection: 'column',
               }}>
-              {text === '' ? (
+              {text1 === '' ? (
                 <Text style={styles.normalText}>Select Start Date</Text>
               ) : (
                 <Text
@@ -90,7 +91,7 @@ const DatePick = ({ navigation }) => {
                   Start Date
                 </Text>
               )}
-              <Text style={{ color: '#757575' }}>{text}</Text>
+              <Text style={{ color: '#757575' }}>{text1}</Text>
             </View>
             {/* <Text style={styles.normalText}>Select Start Date</Text> */}
 
@@ -104,7 +105,7 @@ const DatePick = ({ navigation }) => {
         </View>
         <View>
           <TouchableOpacity
-            onPress={showDatePicker}
+            onPress={() => setShow2(true)}
             style={[styles.DateCard, isSelected2 ? styles.SelectedCard : null]}>
             <Text
               style={[
@@ -117,7 +118,7 @@ const DatePick = ({ navigation }) => {
               style={{
                 flexDirection: 'column',
               }}>
-              {text1 === '' ? (
+              {text2 === '' ? (
                 <Text style={styles.normalText}>Select End Date</Text>
               ) : (
                 <Text
@@ -130,7 +131,7 @@ const DatePick = ({ navigation }) => {
                   End Date
                 </Text>
               )}
-              <Text style={{ color: '#757575' }}>{text1}</Text>
+              <Text style={{ color: '#757575' }}>{text2}</Text>
             </View>
             <Feather
               name="chevron-right"
@@ -140,16 +141,31 @@ const DatePick = ({ navigation }) => {
             />
           </TouchableOpacity>
         </View>
-        <DateTimePickerModal
-          isVisible={isDatePickerVisible}
-          mode="date"
-          //onChange={handleConfirm}
-          onConfirm={handleConfirm}
-          onCancel={hideDatePicker}
-        />
+        {show1 && (
+          <DateTimePicker
+            testID="datetimepicker1"
+            value={date}
+            mode="date"
+            //is24Hour={true}
+            display="default"
+            onChange={onChange1}
+            minimumDate={new Date()}
+          />
+        )}
+        {show2 && (
+          <DateTimePicker
+            testID="datetimepicker2"
+            value={date}
+            mode="date"
+            //is24Hour={true}
+            display="default"
+            onChange={onChange2}
+            minimumDate={new Date()}
+          />
+        )}
       </View>
-      <View style={styles.Continue} opacity={0.5}>
-        <TouchableOpacity style={styles.btnConfirm} disabled>
+      <View style={styles.Continue}>
+        <TouchableOpacity style={styles.btnConfirm} onPress={DateConfirm}>
           <Text style={styles.btnText}>Continue</Text>
         </TouchableOpacity>
       </View>
