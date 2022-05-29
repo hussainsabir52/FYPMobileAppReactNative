@@ -88,7 +88,7 @@ const Login = ({ navigation }) => {
                 } catch (err) {
                     console.log(err);
                     showMessage({
-                        message: err.message,
+                        message: "Incorrect Email or Password",
                         type: 'danger'
                     });
                 }

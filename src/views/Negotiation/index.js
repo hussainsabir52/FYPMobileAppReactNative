@@ -20,6 +20,27 @@ import { setNegotiatedFare } from '../../actions/negotiatedFare';
 import axios from 'axios';
 import { parse } from 'react-native-svg';
 
+const tempData = [
+  {
+    'driver_name': 'Mustaali',
+    'make': 'Honda City',
+    'vehicleNumber': 'GJA424',
+    'fare': 400
+  },
+  {
+    'driver_name': 'Mustaali',
+    'make': 'Honda City',
+    'vehicleNumber': 'GJA424',
+    'fare': 400
+  },
+  {
+    'driver_name': 'Mustaali',
+    'make': 'Honda City',
+    'vehicleNumber': 'GJA424',
+    'fare': 400
+  },
+]
+
 const Negotiation = ({ navigation }) => {
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
