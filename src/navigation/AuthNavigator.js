@@ -17,6 +17,8 @@ import OnTrip from '../views/OnTrip';
 import Feedback from '../views/Feedback';
 import Delivery from '../views/Delivery';
 import DatePick from '../views/MonthlyCotractBooking/DatePick';
+import DaysofWeek from '../views/MonthlyCotractBooking/DaysOfWeek';
+import TimePicker from '../views/MonthlyCotractBooking/TimePicker';
 
 const AuthStack = createNativeStackNavigator();
 const AuthNavigator = () => {
@@ -94,6 +96,14 @@ const AuthNavigator = () => {
       <AuthStack.Screen
         name="DatePick"
         component={DatePick}
+        options={{ header: () => null }}></AuthStack.Screen>
+      <AuthStack.Screen
+        name="DaysOfWeek"
+        component={DaysofWeek}
+        options={{ header: () => null }}></AuthStack.Screen>
+      <AuthStack.Screen
+        name="TimePicker"
+        component={TimePicker}
         options={{ header: () => null }}></AuthStack.Screen>
     </AuthStack.Navigator>
   );

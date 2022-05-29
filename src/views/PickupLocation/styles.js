@@ -1,4 +1,9 @@
 import { StyleSheet, StatusBar } from 'react-native';
+import colors from '../../../assets/colors/color';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 export default StyleSheet.create({
   container: {
@@ -15,16 +20,34 @@ export default StyleSheet.create({
     width: '100%',
     height: '7%',
     padding: 5,
-    flexDirection: 'row',
+    flexDirection: 'column',
     //justifyContent: 'space-between',
   },
   ShowOptions: {
     height: 100,
+    width: 150,
   },
   ConfirmButton: {
-    marginHorizontal: 10,
+    // marginHorizontal: 10,
     height: 100,
-    alignItems: 'center',
+
+    justifyContent: 'center',
+    marginTop: hp('73%'),
+  },
+  btnConfirm: {
+    backgroundColor: colors.yellow,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    marginBottom: 20,
+    borderRadius: 30,
+    marginHorizontal: 20,
+    elevation: 10,
+  },
+  btnText: {
+    color: colors.black,
+    fontFamily: 'NotoSans-SemiBold',
+    fontSize: 18,
+    alignSelf: 'center',
   },
   RBsheet: {
     wrapper: {
@@ -40,13 +63,14 @@ export default StyleSheet.create({
     },
   },
   textbox: {
-    textAlign: 'center',
     fontWeight: '600',
     fontSize: 25,
-    marginTop: 15,
-    color: '#000',
+    color: '#000000',
     textAlign: 'left',
-    marginLeft: 20,
+    backgroundColor: colors.yellow,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    marginBottom: -10,
   },
   searchBar: {
     backgroundColor: '#D3D3D3',
