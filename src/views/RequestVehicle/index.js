@@ -22,6 +22,18 @@ import { color } from 'react-native-reanimated';
 import { NavigationContainer } from '@react-navigation/native';
 import axios from 'axios';
 export default function RequestVehicle({ navigation }) {
+  const locList = useSelector((state) => state.locationList);
+  const toLoc = useSelector((state) => state.rideNowRequest.dropoff_id);
+  const fromLoc = useSelector((state) => state.rideNowRequest.pickup_id);
+  let dropoff, pickup;
+  for (let i = 0; i < locList.length; i++){
+    if (toLoc == i+1){
+      dropoff = locList[i].address;
+    }
+    if (fromLoc == i+1){
+      pickup = locList[i].address;
+    }
+  }
   const {user_id ,dropoff_id, pickup_id, fare, vehicle_typeID} = useSelector((state) => state.rideNowRequest);
   const rideReq = {
     'user_id': user_id,
@@ -138,13 +150,13 @@ export default function RequestVehicle({ navigation }) {
             <View style={styles.pickupWrapper}>
               <Text style={styles.pickndropText}>Pickup</Text>
               <Text style={styles.location}>
-                House B-267, Block 13D/1, Gulshan-e-Iqbal, Karachi
+                {pickup}
               </Text>
             </View>
             <View style={styles.DropoffWrapper}>
               <Text style={styles.pickndropText}>Dropoff</Text>
               <Text style={styles.location}>
-                Aga Khan University Hospital Entrance 1
+                {dropoff}
               </Text>
             </View>
           </View>

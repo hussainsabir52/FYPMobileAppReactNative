@@ -144,6 +144,8 @@ export default styles = StyleSheet.create({
     width: 38,
     height: 42,
     borderRadius: 40,
+    borderWidth: 1,
+    borderColor: '#5C5F68',
     marginTop: 12,
   },
   cardContainer: {

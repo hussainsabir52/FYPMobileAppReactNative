@@ -56,7 +56,17 @@ const Negotiation = ({ navigation }) => {
     'ride_id': rideID,
     'user_fare': initailFare
   }
-  const offerAcceptHandler = () => {
+  const offerAcceptHandler = (id, fare) => {
+    const ACCEPTDRIVER = {
+      'ride_id': rideID,
+      'fare': fare,
+      'driver_id': id
+    }
+    axios.post('https://conveygo-microservice.herokuapp.com/v1/accept-ride-user', ACCEPTDRIVER).then(
+      (res)=>{
+        console.log(res.data);
+      }
+    );
     navigation.navigate('Arriving');
   };
   const negativeHandler = () => {
@@ -103,7 +113,7 @@ const Negotiation = ({ navigation }) => {
       <TouchableOpacity onPress={() => setShowView(!showView)}>
         <Text style={{color: 'red', fontSize: 20}}>X</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={offerAcceptHandler}>
+      <TouchableOpacity onPress={() => {offerAcceptHandler(item.driverID, item.driver_fare)}}>
       <Text style={{color: 'green', fontSize: 20}}>Y</Text>
       </TouchableOpacity>
     </View>

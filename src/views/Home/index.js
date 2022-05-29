@@ -25,6 +25,9 @@ import { setTypeRideNow, setTypeDelivery } from '../../actions/rideType';
 
 const Home = ({ navigation }) => {
   dispatch = useDispatch();
+  const userfName = useSelector((state) => state.isLogged.firstName);
+  const usermName = useSelector((state) => state.isLogged.middleName);
+  const userlName = useSelector((state) => state.isLogged.lastName);
   const locs = useSelector((state) => state.locationList);
   const rideHandler = () => {
     dispatch(setTypeRideNow());
@@ -93,10 +96,10 @@ const Home = ({ navigation }) => {
         />
         <View style={styles.nameWrapper}>
           <Text style={styles.welcome}>Welcome,</Text>
-          <Text style={styles.username}>Muhammad Hasan</Text>
+          <Text style={styles.username}>{userfName} {usermName} {userlName}</Text>
         </View>
         <Image
-          source={require('../../../images/user.jpg')}
+          source={require('../../../images/user_placeholder.jpg')}
           style={styles.userProfile}></Image>
       </View>
       <View>
