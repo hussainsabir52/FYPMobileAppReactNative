@@ -11,12 +11,20 @@ export default StyleSheet.create({
     padding: 8,
   },
   showOptions: {
-    marginTop: '2%',
-    marginBottom: '190%',
-    marginRight: '60%',
-    width: '35%',
-    height: '7%',
+    // marginTop: '2%',
+    // marginBottom: '190%',
+    // marginRight: '60%',
+    // width: '35%',
+    // height: '7%',
     padding: 5,
+    alignItems: 'baseline',
+    position: 'absolute',
+    bottom: 10,
+  },
+  ShowOptionsbtn: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 10,
+    padding: 10,
   },
   RBsheet: {
     wrapper: {
@@ -96,6 +104,7 @@ export default StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 10,
   },
 
   pickndropContainer: {
@@ -130,7 +139,7 @@ export default StyleSheet.create({
     backgroundColor: colors.yellow,
     paddingVertical: 10,
     paddingHorizontal: 100,
-    marginBottom: 20,
+    marginBottom: 10,
     marginTop: 10,
     borderRadius: 30,
     width: '95%',

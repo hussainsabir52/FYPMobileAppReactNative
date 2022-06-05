@@ -3,13 +3,15 @@ import { View, TouchableOpacity, Text } from 'react-native';
 import styles from './styles';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Feather from 'react-native-vector-icons/Feather';
+import { useDispatch } from 'react-redux';
+import { setTime } from '../../../actions/rideNowRequest';
 
 export default TimePicker = ({ navigation }) => {
   const [isSelected, setisSelected] = useState(true);
   const [show, setShow] = useState(false);
   const [date, setDate] = useState(new Date());
   const [text, setText] = useState('');
-
+  const dispatch = useDispatch();
   const onChange = (event, SelectedDate) => {
     const currentDate = SelectedDate || date;
     function addZero(i) {
@@ -31,6 +33,7 @@ export default TimePicker = ({ navigation }) => {
       addZero(tempDate.getHours()) + ' : ' + addZero(tempDate.getMinutes());
     setShow(false);
     setText(fTime);
+    setTime(text);
     setisSelected(false);
 
     console.log('Time:' + fTime);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import styles from '../Delivery/styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -8,10 +8,35 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import { setFare } from '../../actions/rideNowRequest';
+import { setRideId } from '../../actions/negotiatedFare';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios'
 
 const Delivery = ({ navigation }) => {
-  const PlaceOrder = () => {
-    navigation.navigate('Negotiation');
+  const dispatch = useDispatch();
+  const {user_id ,dropoff_id, pickup_id, fare} = useSelector((state) => state.rideNowRequest);
+  const rideReq = {
+    user_id: user_id,
+    from_location: pickup_id,
+    to_location: dropoff_id,
+    fare: fare,
+    vehicle_type: 5,
+  };
+  const [fareValue, setFareValue] = useState('');
+  const PlaceOrder = async () => {
+    axios
+      .post('https://conveygo-microservice.herokuapp.com/v1/deliver-now', rideReq)
+      .then((res) => {
+        dispatch(setRideId(res.data?.rideId));
+        console.log(res.data?.rideId);
+        navigation.navigate('Negotiation');
+      });
+  };
+
+  const fareHandler = (value) => {
+    setFareValue(value);
+    dispatch(setFare(value));
   };
   return (
     <View style={styles.container}>
@@ -46,12 +71,16 @@ const Delivery = ({ navigation }) => {
       <View style={styles.FareWrapper}>
         <Text style={styles.LocationHeading}>Choose Your Fare</Text>
         <View style={styles.recommendedFare}>
-          <Text style={styles.NormalText}>Recommended service fee</Text>
+          <Text style={styles.NormalText}>Enter Your Fare</Text>
           <TextInput
-            placeholder="PKR 275"
+            placeholder=' Fare '
+            value={fareValue}
             placeholderTextColor="#000000"
             keyboardType="number-pad"
-            style={styles.FareInput}></TextInput>
+            style={styles.FareInput}
+            onChangeText={(value) => {
+              fareHandler(value);
+            }}></TextInput>
         </View>
       </View>
       <View style={styles.instructions}>

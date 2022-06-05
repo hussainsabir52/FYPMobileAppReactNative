@@ -109,10 +109,11 @@ export default styles = StyleSheet.create({
   btnConfirm: {
     backgroundColor: colors.yellow,
     paddingVertical: 10,
-    paddingHorizontal: 5,
+    paddingHorizontal: wp('25%'),
     marginBottom: 20,
     marginHorizontal: 20,
     borderRadius: 10,
+    elevation: 5
   },
   btnText: {
     color: colors.black,
@@ -180,5 +181,23 @@ export default styles = StyleSheet.create({
     fontFamily: 'NotoSans-SemiBold',
     fontSize: 18,
     color: colors.black,
+  },
+  btnRefresh: {
+    width: '15%',
+    marginBottom: 20,
+    marginHorizontal: 5,
+    marginLeft: 10,
+    borderRadius: 10,
+    elevation: 5,
+  },
+  reload: {
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    alignSelf: 'center',
+    marginTop: 10,
+    paddingHorizontal: 10,
+  },
+  btnWrapper: {
+    flexDirection: 'row',
   },
 });

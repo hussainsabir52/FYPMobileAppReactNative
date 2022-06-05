@@ -1,4 +1,4 @@
-const driverDataReducer = (state = [], action) => {
+const driverDataReducer = (state = 0, action) => {
     switch(action.type){
         case 'setDriverData':
             return action.payload;

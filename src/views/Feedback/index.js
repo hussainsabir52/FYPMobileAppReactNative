@@ -12,8 +12,10 @@ import { Rating } from 'react-native-ratings';
 import styles from './styles';
 import Map from '../../components/Map';
 import { colors } from 'react-native-elements';
+import { useSelector } from 'react-redux';
 
 const Feedback = ({ navigation }) => {
+  const driverData = useSelector((state) => state.driverData);
   const HomePage = () => {
     navigation.navigate('Home');
   };
@@ -32,13 +34,13 @@ const Feedback = ({ navigation }) => {
         <View style={styles.driverImageWrapper}>
           <Image
             style={styles.driverImage}
-            source={require('../../../images/author-3.jpg')}></Image>
+            source={require('../../../images/user_placeholder.jpg')}></Image>
         </View>
       </View>
       <View style={styles.driverContainer}>
         <View style={styles.driverDetails}>
           <View style={styles.driverName}>
-            <Text style={styles.NameText}>Muhammad Asif</Text>
+            <Text style={styles.NameText}>{driverData.driver_name}</Text>
           </View>
         </View>
       </View>

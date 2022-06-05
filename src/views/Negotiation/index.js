@@ -19,6 +19,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setNegotiatedFare } from '../../actions/negotiatedFare';
 import axios from 'axios';
 import { parse } from 'react-native-svg';
+import { setDriverData } from '../../actions/driverData';
 
 const Negotiation = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const Negotiation = ({ navigation }) => {
     useSelector((state) => state.rideNowRequest.fare),
   );
   const rideID = useSelector((state) => state.negotiatedFare.rideID);
+  const rideType = useSelector((state) => state.rideType);
   const RIDEID = {
     ride_id: rideID,
   };
@@ -37,17 +39,29 @@ const Negotiation = ({ navigation }) => {
     'ride_id': rideID,
     'user_fare': initailFare
   }
-  const offerAcceptHandler = (id, fare) => {
+  const offerAcceptHandler = (id, fare, item) => {
     const ACCEPTDRIVER = {
       'ride_id': rideID,
       'fare': fare,
       'driver_id': id
     }
-    axios.post('https://conveygo-microservice.herokuapp.com/v1/accept-ride-user', ACCEPTDRIVER).then(
+    if (rideType.rideNow == true){
+      axios.post('https://conveygo-microservice.herokuapp.com/v1/accept-ride-user', ACCEPTDRIVER).then(
       (res)=>{
         console.log(res.data);
       }
     );
+    }
+    else if (rideType.Delivery == true){
+      axios.post('https://conveygo-microservice.herokuapp.com/v1/accept-ride-user-delivery', ACCEPTDRIVER).then(
+      (res)=>{
+        console.log(res.data);
+      }
+    );
+    }
+    dispatch(setDriverData(item));
+    console.log("This is redux driver data");
+    console.log(item);
     navigation.navigate('Arriving');
   };
   const negativeHandler = () => {
@@ -59,7 +73,8 @@ const Negotiation = ({ navigation }) => {
   const negotiateHandler = () => {
     setModalVisible(!modalVisible);
     dispatch(setNegotiatedFare(initailFare));
-    axios
+    if (rideType.rideNow == true) {
+      axios
       .post(
         'https://conveygo-microservice.herokuapp.com/v1/user-fare',
         NEGOTIATEDFARE,
@@ -67,11 +82,23 @@ const Negotiation = ({ navigation }) => {
       .then((res) => {
         console.log(res.data);
       });
+    }
+    else if (rideType.Delivery == true){
+      axios
+      .post(
+        'https://conveygo-microservice.herokuapp.com/v1/user-fare-delivery',
+        NEGOTIATEDFARE,
+      )
+      .then((res) => {
+        console.log(res.data);
+      });
+    }
   };
 
   const refreshHandler = async () => {
     setRefreshButton(true);
-    axios
+    if (rideType.rideNow == true){
+      axios
       .post(
         'https://conveygo-microservice.herokuapp.com/v1/get-drivers',
         RIDEID,
@@ -80,6 +107,18 @@ const Negotiation = ({ navigation }) => {
         console.log(res.data.drivers);
         setDData(res.data.drivers);
       });
+    }
+    else if (rideType.Delivery == true){
+      axios
+      .post(
+        'https://conveygo-microservice.herokuapp.com/v1/get-drivers-delivery',
+        RIDEID,
+      )
+      .then((res) => {
+        console.log(res.data.drivers);
+        setDData(res.data.drivers);
+      });
+    }
     setTimeout(() => {
       setRefreshButton(false);
     }, 3000);
@@ -108,7 +147,7 @@ const Negotiation = ({ navigation }) => {
             <Text style={styles.amountText}>PKR</Text>
           </View>
           <View style={styles.buttonContainer}>
-            <TouchableOpacity onPress={() => {offerAcceptHandler(item.driverID, item.driver_fare)}}>
+            <TouchableOpacity onPress={() => {offerAcceptHandler(item.driverID, item.driver_fare, item)}}>
               <Feather
                 name="check"
                 color={'#000000'}
@@ -307,17 +346,29 @@ const Negotiation = ({ navigation }) => {
         renderItem={renderItem}
         keyExtractor={() => Math.random(10000)}
       />
-      <View>
+      <View style={styles.btnWrapper}>
+        <TouchableOpacity
+          disabled={refreshButton}
+          style={[
+            styles.btnRefresh,
+            refreshButton
+              ? { backgroundColor: '#EFEFEF' }
+              : { backgroundColor: '#FFFFFF' },
+          ]}
+          onPress={refreshHandler}>
+          <AntDesign
+            name="reload1"
+            size={30}
+            color="#000000"
+            style={[
+              styles.reload,
+              refreshButton ? { color: '#9F9F9F' } : { color: '#000000' },
+            ]}></AntDesign>
+        </TouchableOpacity>
         <TouchableOpacity
           style={styles.btnConfirm}
           onPress={() => setModalVisible(true)}>
           <Text style={styles.btnText}>Negotiate</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          disabled={refreshButton}
-          style={styles.btnConfirm}
-          onPress={refreshHandler}>
-          <Text style={styles.btnText}>Refresh</Text>
         </TouchableOpacity>
       </View>
     </View>

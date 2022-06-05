@@ -3,6 +3,8 @@ import { View, TouchableOpacity, Text } from 'react-native';
 import styles from './styles';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Feather from 'react-native-vector-icons/Feather';
+import { useDispatch } from 'react-redux';
+import { setStartDate, setEndDate } from '../../../actions/rideNowRequest';
 
 const DatePick = ({ navigation }) => {
   const [date, setDate] = useState(new Date());
@@ -11,6 +13,7 @@ const DatePick = ({ navigation }) => {
   const [show2, setShow2] = useState(false);
   const [text1, setText1] = useState('');
   const [text2, setText2] = useState('');
+  const dispatch = useDispatch();
 
   const onChange1 = (event, SelectedDate) => {
     const currentDate = SelectedDate || date;
@@ -26,6 +29,7 @@ const DatePick = ({ navigation }) => {
     //   'Hours: ' + tempDate.getHours() + '| Minutes: ' + tempDate.getMinutes();
     setShow1(false);
     setText1(fDate);
+    dispatch(setStartDate(text1));
     setisSelected1(false);
     setisSelected2(true);
     console.log('Start Date: ' + fDate);
@@ -44,7 +48,7 @@ const DatePick = ({ navigation }) => {
     //   'Hours: ' + tempDate.getHours() + '| Minutes: ' + tempDate.getMinutes();
     setShow2(false);
     setText2(fDate);
-
+    dispatch(setEndDate(text2));
     console.log('End Date:' + fDate);
   };
 

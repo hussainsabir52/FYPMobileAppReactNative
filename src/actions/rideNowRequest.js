@@ -32,3 +32,24 @@ export const setVehicleId = (payload) => {
         payload
     };
 };
+
+export const setStartDate = (payload) => {
+    return{
+        type: 'setStartDate',
+        payload
+    };
+};
+
+export const setEndDate = (payload) => {
+    return{
+        type: 'setEndDate',
+        payload
+    };
+};
+
+export const setTime = (payload) => {
+    return{
+        type: 'setTime',
+        payload
+    };
+};

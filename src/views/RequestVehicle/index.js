@@ -17,7 +17,7 @@ import { faBorderStyle } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFare, setVehicleId } from '../../actions/rideNowRequest';
 import { setRideId } from '../../actions/negotiatedFare';
-
+import Feather from 'react-native-vector-icons/Feather';
 import colors from '../../../assets/colors/color';
 import { color } from 'react-native-reanimated';
 import { NavigationContainer } from '@react-navigation/native';
@@ -35,6 +35,8 @@ export default function RequestVehicle({ navigation }) {
       pickup = locList[i].address;
     }
   }
+  if (dropoff.length > 50) dropoff = dropoff.slice(0, 50) + '...';
+  if (pickup.length > 50) pickup = pickup.slice(0, 50) + '...';
   const {user_id ,dropoff_id, pickup_id, fare, vehicle_typeID} = useSelector((state) => state.rideNowRequest);
   const rideReq = {
     user_id: user_id,
@@ -44,8 +46,9 @@ export default function RequestVehicle({ navigation }) {
     vehicle_type: vehicle_typeID,
   };
   const [fareValue, setFareValue] = useState('');
-  const [vehiclebtn, setVehiclebtn] = useState('');
+  const [vehiclebtn, setVehiclebtn] = useState(1);
   const [isloader, setisloader] = useState(false);
+  const [ShowOptionsbtnVisible, setShowOptionsbtnVisible] = useState(true);
   const dispatch = useDispatch();
   const refRBSheet = useRef();
   useEffect(() => {
@@ -77,14 +80,18 @@ export default function RequestVehicle({ navigation }) {
       }}>
       <Map />
       <Text style={styles.requestvehicle}>Request Vehicle</Text>
-      <View style={styles.showOptions}>
-        <Button
-          title="Show Options"
-          onPress={() => {
-            refRBSheet.current.open();
-          }}
-        />
-      </View>
+      {ShowOptionsbtnVisible && (
+        <View style={styles.showOptions}>
+          <TouchableOpacity
+            style={styles.ShowOptionsbtn}
+            onPress={() => {
+              refRBSheet.current.open();
+              setShowOptionsbtnVisible(true);
+            }}>
+            <Feather name="chevrons-up" color="#000000" size={30}></Feather>
+          </TouchableOpacity>
+        </View>
+      )}
       <RBSheet
         ref={refRBSheet}
         closeOnDragDown={false}
@@ -101,7 +108,7 @@ export default function RequestVehicle({ navigation }) {
                   styles.vehicleCard,
                   {
                     backgroundColor:
-                      vehiclebtn === 1 ? colors.yellow : '#F5E9A6',
+                    vehiclebtn != 1 ? '#F5E9A6' : colors.yellow,
                   },
                 ]}
                 onPress={() => {

@@ -3,7 +3,10 @@ const initialState = {
     dropoff_id: 0,
     pickup_id: 0,
     fare: 0,
-    vehicle_typeID: 1
+    vehicle_typeID: 1,
+    start_date: '',
+    end_date: '',
+    time: ''
 }
 
 const rideNowRequestReducer = (state = initialState, action) => {
@@ -18,6 +21,12 @@ const rideNowRequestReducer = (state = initialState, action) => {
             return {...state, fare: action.payload};
         case 'setVehicleId':
             return {...state, vehicle_typeID: action.payload};
+        case 'setStartDate':
+            return {...state, start_date: action.payload};
+        case 'setEndDate':
+            return {...state, end_date: action.payload};
+        case 'setTime':
+            return {...state, time: action.payload};
         default:
             return state;
     }

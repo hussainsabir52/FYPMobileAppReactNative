@@ -58,7 +58,7 @@ const Login = ({ navigation }) => {
   };
 
   const forgotPassHandler = () => {
-    navigation.navigate('Home');
+    navigation.navigate('OnTrip');
   };
 
   const loginInHandler = async () => {
@@ -93,18 +93,21 @@ const Login = ({ navigation }) => {
           }
         } catch (err) {
           console.log(err);
+          setIsLoading(false);
           showMessage({
             message: 'Incorrect Email or Password',
             type: 'danger',
           });
         }
       } else {
+        setIsLoading(false);
         showMessage({
           message: 'Password Required !!',
           type: 'danger',
         });
       }
     } else {
+        setIsLoading(false);
       showMessage({
         message: 'Username Required !!',
         type: 'danger',

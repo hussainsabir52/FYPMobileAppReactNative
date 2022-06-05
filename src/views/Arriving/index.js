@@ -5,14 +5,19 @@ import {
   Image,
   Modal,
   Button,
+  Linking
 } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './styles';
 import Map from '../../components/Map';
 import Feather from 'react-native-vector-icons/Feather';
+import { useSelector } from 'react-redux';
 
 const Arriving = ({ navigation }) => {
+  const driverData = useSelector((state) => state.driverData);
   const [ContactDriverModalVisible, setContactDriverModalVisible] =
+    useState(false);
+    const [driverArrivedModalVisible, setDriverArrivedModalVisible] =
     useState(false);
   const [RideCancelModal, setRideCancelModal] = useState(false);
   const RideCancelHandler = () => {
@@ -21,13 +26,21 @@ const Arriving = ({ navigation }) => {
   const RatingHandler = () => {
     navigation.navigate('OnTrip');
   };
+  const CallHandler = () => {
+    Linking.openURL(`tel:${driverData.contact_number}`)
+  }
+  useEffect(() => {
+    setTimeout(() => {
+      setDriverArrivedModalVisible(true);
+    }, 10000);
+  })
   return (
     <View style={styles.conatiner}>
       <Modal animationType="fade" visible={RideCancelModal} transparent>
         <View style={styles.CancelmodalBackground}>
           <View style={styles.Cancelmodalcontainer}>
             <Text style={[styles.text, { marginHorizontal: 10, fontSize: 15 }]}>
-              Are you sure you want to cancel ride?
+              Are you sure you want to cancel your ride?
             </Text>
             <View style={styles.cancelbtns}>
               <TouchableOpacity
@@ -59,19 +72,52 @@ const Arriving = ({ navigation }) => {
                 style={styles.carTopImage}></Image>
             </View>
             <View>
+              <Text style={styles.text}>Contact Driver</Text>
+            </View>
+            <View style={styles.modalbuttonContainer}>
+              {/* <TouchableOpacity
+                onPress={RatingHandler}
+                style={styles.Okbtn}>
+                <Text style={styles.OkbtnText}>Ok</Text>
+              </TouchableOpacity> */}
+              <TouchableOpacity style={styles.Okbtn} onPress={CallHandler}>
+                <Text style={styles.OkbtnText}>Call</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.Callbtn} onPress={() => {
+          setContactDriverModalVisible(!ContactDriverModalVisible);
+        }}>
+                <Text style={styles.OkbtnText}>Close</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
+      <Modal
+        animationType="fade"
+        visible={driverArrivedModalVisible}
+        transparent
+        onRequestClose={() => {
+          setDriverArrivedModalVisible(!driverArrivedModalVisible);
+        }}>
+        <View style={styles.modalBackground}>
+          <View style={styles.modalcontainer}>
+            <View style={styles.carTop}>
+              <Image
+                source={require('../../../images/car_top.png')}
+                style={styles.carTopImage}></Image>
+            </View>
+            <View>
               <Text style={styles.text}>Your ride has arrived</Text>
             </View>
             <View style={styles.modalbuttonContainer}>
               <TouchableOpacity
-                onPress={() =>
-                  setContactDriverModalVisible(!ContactDriverModalVisible)
-                }
+                onPress={RatingHandler}
                 style={styles.Okbtn}>
-                <Text style={styles.OkbtnText}>OK!</Text>
+                <Text style={styles.OkbtnText}>Ok</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.Callbtn} onPress={RatingHandler}>
+              {/* <TouchableOpacity style={styles.Callbtn} onPress={RatingHandler}>
                 <Text style={styles.OkbtnText}>Call</Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
           </View>
         </View>
@@ -86,13 +132,13 @@ const Arriving = ({ navigation }) => {
         <View style={styles.driverImageWrapper}>
           <Image
             style={styles.driverImage}
-            source={require('../../../images/author-3.jpg')}></Image>
+            source={require('../../../images/user_placeholder.jpg')}></Image>
         </View>
       </View>
       <View style={styles.driverContainer}>
         <View style={styles.driverDetails}>
           <View style={styles.driverName}>
-            <Text style={styles.NameText}>Muhammad Asif</Text>
+            <Text style={styles.NameText}>{driverData.driver_name}</Text>
           </View>
           <View style={styles.driverRatingWrapper}>
             <Image
@@ -101,8 +147,8 @@ const Arriving = ({ navigation }) => {
           </View>
         </View>
         <View style={styles.vehicleDetails}>
-          <Text style={styles.vehicleno}>HS785K</Text>
-          <Text style={styles.vehicleName}>White Honda Civic X</Text>
+          <Text style={styles.vehicleno}>{driverData.vehicleNumber}</Text>
+          <Text style={styles.vehicleName}>{driverData.make}</Text>
         </View>
       </View>
       <View style={styles.buttonContainer}>

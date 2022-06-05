@@ -16,6 +16,7 @@ import Data from './Data';
 import styles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDropoffId } from '../../actions/rideNowRequest';
+import Feather from 'react-native-vector-icons/Feather';
 export default function DropoffLocation({ navigation }, props) {
   const [search, setSearch] = useState('');
   const [BSheight, setBSheight] = useState(150);
@@ -86,8 +87,10 @@ export default function DropoffLocation({ navigation }, props) {
           paddingLeft: 20,
           paddingTop: 10,
           paddingBottom: 10,
-          fontSize: 20,
-          color: 'black'
+          fontSize: 15,
+          color: '#565656',
+          borderBottomColor: '#DFDFDF',
+          borderBottomWidth: 1,
         }}>
         {item.address}
       </Text>
@@ -124,14 +127,21 @@ export default function DropoffLocation({ navigation }, props) {
         </Text> */}
       <View style={styles.buttonsContainer}>
         <View style={styles.ShowOptions}>
-          <Button
-            title="Show Options"
+        
+<TouchableOpacity
+            style={styles.ShowOptionsbtn}
             onPress={() => {
               refRBSheet.current.open();
               setConfirmbtnShow(false);
               setBSheight(150);
-            }}
-          />
+            }}>
+            <Feather
+              name="chevrons-up"
+              color="#000000"
+              size={30}
+              style={styles.chevronUp}
+            />
+          </TouchableOpacity>
         </View>
 
         {ConfirmbtnShow && (
@@ -161,7 +171,7 @@ export default function DropoffLocation({ navigation }, props) {
               backgroundColor: '#F0F0F0',
             }}
             inputStyle={{
-              color: '#000',
+              color: '#696969',
             }}
             round={true}
             placeholder="Enter you destination"

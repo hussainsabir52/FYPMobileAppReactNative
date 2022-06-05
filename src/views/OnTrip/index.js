@@ -9,8 +9,10 @@ import {
 import React, { useState } from 'react';
 import styles from './styles';
 import Map from '../../components/Map';
+import { useSelector } from 'react-redux';
 
 const OnTrip = ({ navigation }) => {
+  const driverData = useSelector((state) => state.driverData)
   const feedbackHandler = () => {
     navigation.navigate('Feedback');
   };
@@ -26,13 +28,13 @@ const OnTrip = ({ navigation }) => {
         <View style={styles.driverImageWrapper}>
           <Image
             style={styles.driverImage}
-            source={require('../../../images/author-3.jpg')}></Image>
+            source={require('../../../images/user_placeholder.jpg')}></Image>
         </View>
       </View>
       <View style={styles.driverContainer}>
         <View style={styles.driverDetails}>
           <View style={styles.driverName}>
-            <Text style={styles.NameText}>Muhammad Asif</Text>
+            <Text style={styles.NameText}>{driverData.driver_name}</Text>
           </View>
           <View style={styles.driverRatingWrapper}>
             <Image
@@ -41,8 +43,8 @@ const OnTrip = ({ navigation }) => {
           </View>
         </View>
         <View style={styles.vehicleDetails}>
-          <Text style={styles.vehicleno}>HS785K</Text>
-          <Text style={styles.vehicleName}>White Honda Civic X</Text>
+          <Text style={styles.vehicleno}>{driverData.vehicleNumber}</Text>
+          <Text style={styles.vehicleName}>{driverData.make}</Text>
         </View>
       </View>
       <View style={styles.buttonContainer}>
