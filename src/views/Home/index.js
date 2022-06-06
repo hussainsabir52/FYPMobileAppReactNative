@@ -24,6 +24,7 @@ import { locationList } from '../../actions/locationList';
 import { setTypeRideNow, setTypeDelivery } from '../../actions/rideType';
 
 const Home = ({ navigation }) => {
+
   dispatch = useDispatch();
   const userfName = useSelector((state) => state.isLogged.firstName);
   const usermName = useSelector((state) => state.isLogged.middleName);

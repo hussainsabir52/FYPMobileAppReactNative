@@ -6,8 +6,8 @@
  * @flow strict-local
  */
 
-import React from 'react';
-
+import React, { useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Navigation from './src/navigation/AuthNavigator';
 import { getStateFromPath, NavigationContainer } from '@react-navigation/native';
 import FlashMessage from 'react-native-flash-message';
@@ -20,9 +20,8 @@ const store = createStore(rootReducers);
 
 
 
-const App = () => {
+const App = ({ navigation }) => {
 
-  
 
   return (
     <Provider store={store}>

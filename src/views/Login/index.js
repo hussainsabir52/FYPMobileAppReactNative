@@ -19,6 +19,7 @@ import styles from './styles';
 import { setUserId } from '../../actions/rideNowRequest';
 
 import api from '../../services/api';
+import Logo from '../../components/Logo';
 // import { getStateFromPath } from '@react-navigation/native';
 
 const Login = ({ navigation }) => {
@@ -27,23 +28,34 @@ const Login = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
+  const [splashLoader, setSplashLoader] = useState(true);
+  const userDATA = useSelector((state) => state.isLogged)
   const clearstorage = async () => {
     await AsyncStorage.clear();
   };
 
   useEffect(() => {
-    try {
-      clearstorage();
-      const value = AsyncStorage.getItem('userData');
-      console.log(value);
-      //   yaha pe !== ayega next line mai
-      if (value == null) {
-        navigation.navigate('Home');
-      }
-    } catch (e) {
-      console.log(e);
+    const checkUser = async () => {
+        try {
+            let value = await AsyncStorage.getItem('userData');
+            //   yaha pe !== ayega next line mai
+            const userD = JSON.parse(value)
+            if (value != null) {
+              dispatch(isLogged(userD));
+              console.log(userD.firstName)
+              navigation.navigate('Home');
+            }
+            else{
+                setSplashLoader(false);
+            }
+          } catch (e) {
+            console.log(e);
+          }
     }
+    setTimeout(() => {
+        checkUser();
+      }, 1000);
+    
   }, []);
 
   //   useEffect(() => {
@@ -79,7 +91,7 @@ const Login = ({ navigation }) => {
               navigation.navigate('EmailVerification', { email: email });
             } else {
               try {
-                await AsyncStorage.setItem('userData', results.userInfo);
+                await AsyncStorage.setItem('userData', JSON.stringify(results.userInfo));
               } catch (e) {
                 console.log(e);
               }
@@ -125,6 +137,8 @@ const Login = ({ navigation }) => {
   };
   return (
     <ScrollView style={styles.scroll} contentContainerStyle={styles.container}>
+      <View>
+      {(splashLoader) ? (<Logo/>) : <View>
       <View style={styles.flex_row}>
         <View style={styles.medium_title_box}>
           <Text style={styles.medium_title} ellipsizeMode={'clip'}>
@@ -187,6 +201,8 @@ const Login = ({ navigation }) => {
             Sign Up
           </Text>
         </Text>
+      </View>
+      </View>}
       </View>
     </ScrollView>
   );
