@@ -130,7 +130,7 @@ export default styles = StyleSheet.create({
     paddingBottom: 24,
   },
   nameWrapper: {
-    //marginLeft: 50,
+    marginLeft: wp('7%'),
   },
   welcome: {
     fontFamily: 'Signika-Regular',

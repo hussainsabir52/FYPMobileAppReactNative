@@ -12,6 +12,7 @@ export default TimePicker = ({ navigation }) => {
   const [date, setDate] = useState(new Date());
   const [text, setText] = useState('');
   const dispatch = useDispatch();
+  var ContinuebtnDisable = true;
   const onChange = (event, SelectedDate) => {
     const currentDate = SelectedDate || date;
     function addZero(i) {
@@ -108,8 +109,12 @@ export default TimePicker = ({ navigation }) => {
           />
         )}
       </View>
+      {(ContinuebtnDisable = text === '' ? true : false)}
       <View style={styles.Continue}>
-        <TouchableOpacity style={styles.btnConfirm} onPress={TimeConfirm}>
+        <TouchableOpacity
+          style={styles.btnConfirm}
+          onPress={TimeConfirm}
+          disabled={ContinuebtnDisable}>
           <Text style={styles.btnText}>Continue</Text>
         </TouchableOpacity>
       </View>

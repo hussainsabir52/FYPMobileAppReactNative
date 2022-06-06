@@ -25,11 +25,11 @@ export default function PickupLocation({ navigation }, nextNavigate) {
   const [location, setLocation] = useState(null);
   const [ConfirmbtnShow, setConfirmbtnShow] = useState(false);
 
-  const {rideNow, Delivery} = useSelector((state) => state.rideType);
+  const { rideNow, Delivery } = useSelector((state) => state.rideType);
 
   const locations = useSelector((state) => state.locationList);
 
-  const dispatch = useDispatch();  
+  const dispatch = useDispatch();
   useEffect(() => {
     fetchdata();
   }, []);
@@ -52,15 +52,13 @@ export default function PickupLocation({ navigation }, nextNavigate) {
   };
 
   const confirmPickupHandler = () => {
-    console.log("this is ridenow and delivery");
+    console.log('this is ridenow and delivery');
     console.log(rideNow, Delivery);
-    if (rideNow == true){
+    if (rideNow == true) {
       navigation.navigate('RequestVehicle');
-    }
-    else if (Delivery == true){
+    } else if (Delivery == true) {
       navigation.navigate('Delivery');
     }
-    
   };
 
   const searchResults = (search) => {
@@ -135,7 +133,7 @@ export default function PickupLocation({ navigation }, nextNavigate) {
         </Text> */}
       <View style={styles.buttonsContainer}>
         <View style={styles.ShowOptions}>
-        <TouchableOpacity
+          <TouchableOpacity
             style={styles.ShowOptionsbtn}
             onPress={() => {
               refRBSheet.current.open();

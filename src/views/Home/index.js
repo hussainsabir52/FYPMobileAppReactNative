@@ -24,11 +24,12 @@ import { locationList } from '../../actions/locationList';
 import { setTypeRideNow, setTypeDelivery } from '../../actions/rideType';
 
 const Home = ({ navigation }) => {
-  dispatch = useDispatch();
+  const dispatch = useDispatch();
   const userfName = useSelector((state) => state.isLogged.firstName);
   const usermName = useSelector((state) => state.isLogged.middleName);
   const userlName = useSelector((state) => state.isLogged.lastName);
   const locs = useSelector((state) => state.locationList);
+
   const rideHandler = () => {
     dispatch(setTypeRideNow());
     navigation.navigate('Dropoff');
@@ -38,18 +39,26 @@ const Home = ({ navigation }) => {
     navigation.navigate('Dropoff');
   };
   const monthlyContractHandler = () => {
-    navigation.navigate('DatePick');
+    navigation.navigate('Summary');
+  };
+  const CarpoolingHandler = () => {
+    navigation.navigate('GenderSelector');
+  };
+  const profileHandler = () => {
+    navigation.navigate('Profile');
   };
 
   useEffect(() => {
     const fetchLocations = async () => {
-      const locations = await axios.get('https://conveygo-microservice.herokuapp.com/v1/locations');
+      const locations = await axios.get(
+        'https://conveygo-microservice.herokuapp.com/v1/locations',
+      );
       dispatch(locationList(locations?.data));
-      console.log("this is location from api");
+      console.log('this is location from api');
       console.log(locs);
-    }
+    };
     fetchLocations();
-  },[])
+  }, []);
 
   useEffect(() => {
     console.log('use HELLO');
@@ -80,6 +89,7 @@ const Home = ({ navigation }) => {
     getLocation();
   });
   Feather.loadFont();
+
   return (
     //NEW UI
 
@@ -88,19 +98,19 @@ const Home = ({ navigation }) => {
         backgroundColor={colors.yellow}
         barStyle={'dark-content'}></StatusBar>
       <View style={styles.header}>
-        <Feather
-          name="menu"
-          size={23}
-          color={colors.black}
-          style={styles.menuicon}
-        />
         <View style={styles.nameWrapper}>
           <Text style={styles.welcome}>Welcome,</Text>
-          <Text style={styles.username}>{userfName} {usermName} {userlName}</Text>
+          <Text style={styles.username}>
+            {userfName} {userlName}
+          </Text>
         </View>
-        <Image
-          source={require('../../../images/user_placeholder.jpg')}
-          style={styles.userProfile}></Image>
+        <Pressable onPress={profileHandler}>
+          <View>
+            <Image
+              source={require('../../../images/user_placeholder.jpg')}
+              style={styles.userProfile}></Image>
+          </View>
+        </Pressable>
       </View>
       <View>
         <Pressable onPress={rideHandler}>
@@ -132,7 +142,7 @@ const Home = ({ navigation }) => {
             />
             <Text style={styles.cardText}>RIDE</Text>
           </Pressable>
-          <Pressable onPress={rideHandler} style={styles.card}>
+          <Pressable onPress={CarpoolingHandler} style={styles.card}>
             <Image
               source={require('../../../images/carpooling.png')}
               style={styles.carImage}

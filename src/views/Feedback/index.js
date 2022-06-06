@@ -6,6 +6,7 @@ import {
   KeyboardAvoidingView,
   KeyboardAwareScrollView,
   TextInput,
+  ScrollView,
 } from 'react-native';
 import React, { useState } from 'react';
 import { Rating } from 'react-native-ratings';
@@ -23,7 +24,7 @@ const Feedback = ({ navigation }) => {
     console.log('Rating is ' + rating);
   };
   return (
-    <View style={styles.conatiner}>
+    <ScrollView contentContainerStyle={styles.conatiner}>
       <View style={styles.headingContainer}>
         <Text style={styles.headingText}>Feedback</Text>
       </View>
@@ -76,7 +77,7 @@ const Feedback = ({ navigation }) => {
           <Text style={styles.ContactButtonText}>Rate</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 export default Feedback;

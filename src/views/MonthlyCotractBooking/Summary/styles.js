@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import colors from '../../../assets/colors/color';
+import colors from '../../../../assets/colors/color';
 
 export default styles = StyleSheet.create({
   container: {
@@ -8,15 +8,15 @@ export default styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     marginVertical: 20,
-    marginHorizontal: 20,
+    marginHorizontal: 10,
     alignItems: 'center',
   },
   chevronLeft: {
     justifyContent: 'space-between',
     backgroundColor: '#FFFFFF',
-    padding: 8,
-    elevation: 5,
     borderRadius: 20,
+    padding: 5,
+    elevation: 5,
   },
   headerText: {
     flex: 1,
@@ -26,7 +26,8 @@ export default styles = StyleSheet.create({
     textAlign: 'center',
   },
   LocationsWrapper: {
-    margin: 20,
+    marginVertical: 20,
+    marginHorizontal: 20,
   },
   LocationHeading: {
     fontFamily: 'NotoSans-SemiBold',
@@ -42,12 +43,11 @@ export default styles = StyleSheet.create({
     fontFamily: 'Inter-Regular',
   },
   FareWrapper: {
-    paddingHorizontal: 20,
-    paddingBottom: 15,
-    borderBottomColor: '#DFDFDF',
-    borderBottomWidth: 8,
-    borderTopColor: '#DFDFDF',
-    borderTopWidth: 8,
+    padding: 20,
+    borderBottomColor: '#E4E4E4',
+    borderBottomWidth: 2,
+    borderTopColor: '#E4E4E4',
+    borderTopWidth: 2,
   },
   recommendedFare: {
     flexDirection: 'row',
@@ -59,6 +59,7 @@ export default styles = StyleSheet.create({
     marginRight: 10,
     height: 40,
     color: colors.black,
+    paddingHorizontal: 20,
   },
   instructions: {
     flexDirection: 'row',
@@ -97,14 +98,14 @@ export default styles = StyleSheet.create({
   btnConfirmWrapper: {
     flex: 1,
     justifyContent: 'flex-end',
-    alignSelf: 'center',
     marginVertical: 20,
-    // margin: 10,
+    alignSelf: 'center',
   },
   btnConfirm: {
+    justifyContent: 'center',
     backgroundColor: colors.yellow,
     paddingVertical: 10,
-    paddingHorizontal: 100,
+    paddingHorizontal: 80,
     marginHorizontal: 30,
     borderRadius: 30,
   },
@@ -113,5 +114,26 @@ export default styles = StyleSheet.create({
     fontFamily: 'NotoSans-SemiBold',
     fontSize: 18,
     alignSelf: 'center',
+  },
+  Contractdetails: {
+    padding: 20,
+    borderBottomColor: '#E4E4E4',
+    borderBottomWidth: 2,
+  },
+  calendarIcon: {
+    paddingRight: 10,
+  },
+  dates: {
+    flexDirection: 'row',
+  },
+  greyText: {
+    color: '#7C7C7C',
+  },
+  DaysOfWeek: {
+    flexDirection: 'row',
+    marginVertical: 10,
+  },
+  pickupTime: {
+    flexDirection: 'row',
   },
 });
