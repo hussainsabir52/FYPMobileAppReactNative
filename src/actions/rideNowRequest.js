@@ -53,3 +53,10 @@ export const setTime = (payload) => {
         payload
     };
 };
+
+export const setDays = (payload) => {
+    return{
+        type: 'setDays',
+        payload
+    };
+};

@@ -21,7 +21,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import axios from 'axios';
 import colors from '../../../assets/colors/color';
 import { locationList } from '../../actions/locationList';
-import { setTypeRideNow, setTypeDelivery } from '../../actions/rideType';
+import { setTypeRideNow, setTypeDelivery, setTypeMonthlyContract } from '../../actions/rideType';
 
 const Home = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -39,7 +39,8 @@ const Home = ({ navigation }) => {
     navigation.navigate('Dropoff');
   };
   const monthlyContractHandler = () => {
-    navigation.navigate('Summary');
+    dispatch(setTypeMonthlyContract());
+    navigation.navigate('DatePick');
   };
   const CarpoolingHandler = () => {
     navigation.navigate('GenderSelector');

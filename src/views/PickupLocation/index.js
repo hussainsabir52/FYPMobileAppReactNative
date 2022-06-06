@@ -25,7 +25,7 @@ export default function PickupLocation({ navigation }, nextNavigate) {
   const [location, setLocation] = useState(null);
   const [ConfirmbtnShow, setConfirmbtnShow] = useState(false);
 
-  const { rideNow, Delivery } = useSelector((state) => state.rideType);
+  const { rideNow, Delivery, monthlyContract } = useSelector((state) => state.rideType);
 
   const locations = useSelector((state) => state.locationList);
 
@@ -58,6 +58,8 @@ export default function PickupLocation({ navigation }, nextNavigate) {
       navigation.navigate('RequestVehicle');
     } else if (Delivery == true) {
       navigation.navigate('Delivery');
+    } else if (monthlyContract == true) {
+      navigation.navigate('Summary')
     }
   };
 

@@ -30,7 +30,7 @@ const DatePick = ({ navigation }) => {
     //   'Hours: ' + tempDate.getHours() + '| Minutes: ' + tempDate.getMinutes();
     setShow1(false);
     setText1(fDate);
-    dispatch(setStartDate(text1));
+    dispatch(setStartDate(fDate));
     setisSelected1(false);
     setisSelected2(true);
     console.log('Start Date: ' + fDate);
@@ -49,7 +49,7 @@ const DatePick = ({ navigation }) => {
     //   'Hours: ' + tempDate.getHours() + '| Minutes: ' + tempDate.getMinutes();
     setShow2(false);
     setText2(fDate);
-    dispatch(setEndDate(text2));
+    dispatch(setEndDate(fDate));
     console.log('End Date:' + fDate);
   };
 

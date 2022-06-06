@@ -42,6 +42,7 @@ const Login = ({ navigation }) => {
             const userD = JSON.parse(value)
             if (value != null) {
               dispatch(isLogged(userD));
+              dispatch(setUserId(userD.userID));
               console.log(userD.firstName)
               navigation.navigate('Home');
             }

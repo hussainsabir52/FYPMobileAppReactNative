@@ -22,6 +22,7 @@ import { parse } from 'react-native-svg';
 import { setDriverData } from '../../actions/driverData';
 
 const Negotiation = ({ navigation }) => {
+  console.log("IN NEGOTIATION");
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
   const [showView, setShowView] = useState(true);
@@ -63,6 +64,15 @@ const Negotiation = ({ navigation }) => {
         .then((res) => {
           console.log(res.data);
         });
+    } else if (rideType.monthlyContract == true){
+      axios
+        .post(
+          'https://conveygo-microservice.herokuapp.com/v1/accept-ride-user-monthly',
+          ACCEPTDRIVER,
+        )
+        .then((res) => {
+          console.log(res.data);
+        });
     }
     dispatch(setDriverData(item));
     console.log('This is redux driver data');
@@ -96,6 +106,15 @@ const Negotiation = ({ navigation }) => {
         .then((res) => {
           console.log(res.data);
         });
+    } else if (rideType.monthlyContract == true) {
+      axios
+        .post(
+          'https://conveygo-microservice.herokuapp.com/v1/user-fare-monthly',
+          NEGOTIATEDFARE,
+        )
+        .then((res) => {
+          console.log(res.data);
+        });
     }
   };
 
@@ -121,6 +140,16 @@ const Negotiation = ({ navigation }) => {
           console.log(res.data.drivers);
           setDData(res.data.drivers);
         });
+    } else if (rideType.monthlyContract == true) {
+      axios
+        .post(
+          'https://conveygo-microservice.herokuapp.com/v1/get-drivers-monthly',
+          RIDEID,
+        )
+        .then((res) => {
+          console.log(res.data.drivers);
+          setDData(res.data.drivers);
+        });
     }
     setTimeout(() => {
       setRefreshButton(false);
@@ -131,26 +160,7 @@ const Negotiation = ({ navigation }) => {
   //   setDData(useSelector((state) => state.driverData));
   // },[])
 
-  const tempData = [
-    {
-      driver_name: 'Muhammad Hasan',
-      make: 'Honda Civic Type R',
-      vehicleNumber: 'JMC-145',
-      driver_fare: '700',
-    },
-    {
-      driver_name: 'Muhammad Hasan',
-      make: 'Honda Civic Type R',
-      vehicleNumber: 'JMC-145',
-      driver_fare: '700',
-    },
-    {
-      driver_name: 'Muhammad Hasan',
-      make: 'Honda Civic Type R',
-      vehicleNumber: 'JMC-145',
-      driver_fare: '700',
-    },
-  ];
+
   const renderItem = ({ item }) => (
     <View style={styles.offersContainer}>
       <View style={styles.OfferWrapper}>
@@ -368,7 +378,7 @@ const Negotiation = ({ navigation }) => {
           </View>
         </View> */}
       <FlatList
-        data={tempData}
+        data={dData}
         renderItem={renderItem}
         keyExtractor={() => Math.random(10000)}
       />

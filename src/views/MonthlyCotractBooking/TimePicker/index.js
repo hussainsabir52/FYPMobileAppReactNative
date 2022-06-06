@@ -34,6 +34,7 @@ export default TimePicker = ({ navigation }) => {
       addZero(tempDate.getHours()) + ' : ' + addZero(tempDate.getMinutes());
     setShow(false);
     setText(fTime);
+    dispatch(setTime(fTime));
     setTime(text);
     setisSelected(false);
 

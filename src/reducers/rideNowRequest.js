@@ -6,7 +6,8 @@ const initialState = {
     vehicle_typeID: 1,
     start_date: '',
     end_date: '',
-    time: ''
+    time: '',
+    days: []
 }
 
 const rideNowRequestReducer = (state = initialState, action) => {
@@ -27,6 +28,8 @@ const rideNowRequestReducer = (state = initialState, action) => {
             return {...state, end_date: action.payload};
         case 'setTime':
             return {...state, time: action.payload};
+        case 'setDays':
+            return {...state, days: action.payload};
         default:
             return state;
     }
