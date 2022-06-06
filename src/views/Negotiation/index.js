@@ -36,31 +36,36 @@ const Negotiation = ({ navigation }) => {
     ride_id: rideID,
   };
   const NEGOTIATEDFARE = {
-    'ride_id': rideID,
-    'user_fare': initailFare
-  }
+    ride_id: rideID,
+    user_fare: initailFare,
+  };
   const offerAcceptHandler = (id, fare, item) => {
     const ACCEPTDRIVER = {
-      'ride_id': rideID,
-      'fare': fare,
-      'driver_id': id
-    }
-    if (rideType.rideNow == true){
-      axios.post('https://conveygo-microservice.herokuapp.com/v1/accept-ride-user', ACCEPTDRIVER).then(
-      (res)=>{
-        console.log(res.data);
-      }
-    );
-    }
-    else if (rideType.Delivery == true){
-      axios.post('https://conveygo-microservice.herokuapp.com/v1/accept-ride-user-delivery', ACCEPTDRIVER).then(
-      (res)=>{
-        console.log(res.data);
-      }
-    );
+      ride_id: rideID,
+      fare: fare,
+      driver_id: id,
+    };
+    if (rideType.rideNow == true) {
+      axios
+        .post(
+          'https://conveygo-microservice.herokuapp.com/v1/accept-ride-user',
+          ACCEPTDRIVER,
+        )
+        .then((res) => {
+          console.log(res.data);
+        });
+    } else if (rideType.Delivery == true) {
+      axios
+        .post(
+          'https://conveygo-microservice.herokuapp.com/v1/accept-ride-user-delivery',
+          ACCEPTDRIVER,
+        )
+        .then((res) => {
+          console.log(res.data);
+        });
     }
     dispatch(setDriverData(item));
-    console.log("This is redux driver data");
+    console.log('This is redux driver data');
     console.log(item);
     navigation.navigate('Arriving');
   };
@@ -75,59 +80,77 @@ const Negotiation = ({ navigation }) => {
     dispatch(setNegotiatedFare(initailFare));
     if (rideType.rideNow == true) {
       axios
-      .post(
-        'https://conveygo-microservice.herokuapp.com/v1/user-fare',
-        NEGOTIATEDFARE,
-      )
-      .then((res) => {
-        console.log(res.data);
-      });
-    }
-    else if (rideType.Delivery == true){
+        .post(
+          'https://conveygo-microservice.herokuapp.com/v1/user-fare',
+          NEGOTIATEDFARE,
+        )
+        .then((res) => {
+          console.log(res.data);
+        });
+    } else if (rideType.Delivery == true) {
       axios
-      .post(
-        'https://conveygo-microservice.herokuapp.com/v1/user-fare-delivery',
-        NEGOTIATEDFARE,
-      )
-      .then((res) => {
-        console.log(res.data);
-      });
+        .post(
+          'https://conveygo-microservice.herokuapp.com/v1/user-fare-delivery',
+          NEGOTIATEDFARE,
+        )
+        .then((res) => {
+          console.log(res.data);
+        });
     }
   };
 
   const refreshHandler = async () => {
     setRefreshButton(true);
-    if (rideType.rideNow == true){
+    if (rideType.rideNow == true) {
       axios
-      .post(
-        'https://conveygo-microservice.herokuapp.com/v1/get-drivers',
-        RIDEID,
-      )
-      .then((res) => {
-        console.log(res.data.drivers);
-        setDData(res.data.drivers);
-      });
-    }
-    else if (rideType.Delivery == true){
+        .post(
+          'https://conveygo-microservice.herokuapp.com/v1/get-drivers',
+          RIDEID,
+        )
+        .then((res) => {
+          console.log(res.data.drivers);
+          setDData(res.data.drivers);
+        });
+    } else if (rideType.Delivery == true) {
       axios
-      .post(
-        'https://conveygo-microservice.herokuapp.com/v1/get-drivers-delivery',
-        RIDEID,
-      )
-      .then((res) => {
-        console.log(res.data.drivers);
-        setDData(res.data.drivers);
-      });
+        .post(
+          'https://conveygo-microservice.herokuapp.com/v1/get-drivers-delivery',
+          RIDEID,
+        )
+        .then((res) => {
+          console.log(res.data.drivers);
+          setDData(res.data.drivers);
+        });
     }
     setTimeout(() => {
       setRefreshButton(false);
-    }, 3000);
+    }, 6000);
   };
 
   // useEffect(() => {
   //   setDData(useSelector((state) => state.driverData));
   // },[])
 
+  const tempData = [
+    {
+      driver_name: 'Muhammad Hasan',
+      make: 'Honda Civic Type R',
+      vehicleNumber: 'JMC-145',
+      driver_fare: '700',
+    },
+    {
+      driver_name: 'Muhammad Hasan',
+      make: 'Honda Civic Type R',
+      vehicleNumber: 'JMC-145',
+      driver_fare: '700',
+    },
+    {
+      driver_name: 'Muhammad Hasan',
+      make: 'Honda Civic Type R',
+      vehicleNumber: 'JMC-145',
+      driver_fare: '700',
+    },
+  ];
   const renderItem = ({ item }) => (
     <View style={styles.offersContainer}>
       <View style={styles.OfferWrapper}>
@@ -147,7 +170,10 @@ const Negotiation = ({ navigation }) => {
             <Text style={styles.amountText}>PKR</Text>
           </View>
           <View style={styles.buttonContainer}>
-            <TouchableOpacity onPress={() => {offerAcceptHandler(item.driverID, item.driver_fare, item)}}>
+            <TouchableOpacity
+              onPress={() => {
+                offerAcceptHandler(item.driverID, item.driver_fare, item);
+              }}>
               <Feather
                 name="check"
                 color={'#000000'}
@@ -342,7 +368,7 @@ const Negotiation = ({ navigation }) => {
           </View>
         </View> */}
       <FlatList
-        data={dData}
+        data={tempData}
         renderItem={renderItem}
         keyExtractor={() => Math.random(10000)}
       />

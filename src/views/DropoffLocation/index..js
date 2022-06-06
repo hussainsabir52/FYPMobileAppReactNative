@@ -63,10 +63,10 @@ export default function DropoffLocation({ navigation }, props) {
     if (search.length === 0) {
       matches = [];
     }
-    console.log("This is matchers");
+    console.log('This is matchers');
     console.log(matches);
     setSuggestions(matches);
-    console.log("This is suggestions");
+    console.log('This is suggestions');
     console.log(suggestions);
   };
 
@@ -127,12 +127,10 @@ export default function DropoffLocation({ navigation }, props) {
         </Text> */}
       <View style={styles.buttonsContainer}>
         <View style={styles.ShowOptions}>
-        
-<TouchableOpacity
+          <TouchableOpacity
             style={styles.ShowOptionsbtn}
             onPress={() => {
               refRBSheet.current.open();
-              setConfirmbtnShow(false);
               setBSheight(150);
             }}>
             <Feather

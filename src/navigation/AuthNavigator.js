@@ -19,6 +19,9 @@ import Delivery from '../views/Delivery';
 import DatePick from '../views/MonthlyCotractBooking/DatePick';
 import DaysofWeek from '../views/MonthlyCotractBooking/DaysOfWeek';
 import TimePicker from '../views/MonthlyCotractBooking/TimePicker';
+import Summary from '../views/MonthlyCotractBooking/Summary';
+import GenderSelector from '../views/Carpooling/GenderSelector';
+import Profile from '../views/Profile';
 
 const AuthStack = createNativeStackNavigator();
 const AuthNavigator = () => {
@@ -104,6 +107,18 @@ const AuthNavigator = () => {
       <AuthStack.Screen
         name="TimePicker"
         component={TimePicker}
+        options={{ header: () => null }}></AuthStack.Screen>
+      <AuthStack.Screen
+        name="Summary"
+        component={Summary}
+        options={{ header: () => null }}></AuthStack.Screen>
+      <AuthStack.Screen
+        name="GenderSelector"
+        component={GenderSelector}
+        options={{ header: () => null }}></AuthStack.Screen>
+      <AuthStack.Screen
+        name="Profile"
+        component={Profile}
         options={{ header: () => null }}></AuthStack.Screen>
     </AuthStack.Navigator>
   );

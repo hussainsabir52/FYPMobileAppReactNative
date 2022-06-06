@@ -5,7 +5,7 @@ import {
   Image,
   Modal,
   Button,
-  Linking
+  Linking,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import styles from './styles';
@@ -17,23 +17,23 @@ const Arriving = ({ navigation }) => {
   const driverData = useSelector((state) => state.driverData);
   const [ContactDriverModalVisible, setContactDriverModalVisible] =
     useState(false);
-    const [driverArrivedModalVisible, setDriverArrivedModalVisible] =
+  const [driverArrivedModalVisible, setDriverArrivedModalVisible] =
     useState(false);
   const [RideCancelModal, setRideCancelModal] = useState(false);
   const RideCancelHandler = () => {
-    navigation.navigate('RequestVehicle');
+    navigation.navigate('Home');
   };
   const RatingHandler = () => {
     navigation.navigate('OnTrip');
   };
   const CallHandler = () => {
-    Linking.openURL(`tel:${driverData.contact_number}`)
-  }
+    Linking.openURL(`tel:${driverData.contact_number}`);
+  };
   useEffect(() => {
     setTimeout(() => {
       setDriverArrivedModalVisible(true);
-    }, 10000);
-  })
+    }, 15000);
+  });
   return (
     <View style={styles.conatiner}>
       <Modal animationType="fade" visible={RideCancelModal} transparent>
@@ -83,9 +83,11 @@ const Arriving = ({ navigation }) => {
               <TouchableOpacity style={styles.Okbtn} onPress={CallHandler}>
                 <Text style={styles.OkbtnText}>Call</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.Callbtn} onPress={() => {
-          setContactDriverModalVisible(!ContactDriverModalVisible);
-        }}>
+              <TouchableOpacity
+                style={styles.Callbtn}
+                onPress={() => {
+                  setContactDriverModalVisible(!ContactDriverModalVisible);
+                }}>
                 <Text style={styles.OkbtnText}>Close</Text>
               </TouchableOpacity>
             </View>
@@ -110,9 +112,7 @@ const Arriving = ({ navigation }) => {
               <Text style={styles.text}>Your ride has arrived</Text>
             </View>
             <View style={styles.modalbuttonContainer}>
-              <TouchableOpacity
-                onPress={RatingHandler}
-                style={styles.Okbtn}>
+              <TouchableOpacity onPress={RatingHandler} style={styles.Okbtn}>
                 <Text style={styles.OkbtnText}>Ok</Text>
               </TouchableOpacity>
               {/* <TouchableOpacity style={styles.Callbtn} onPress={RatingHandler}>

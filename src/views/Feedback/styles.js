@@ -8,6 +8,8 @@ import {
 export default styles = StyleSheet.create({
   conatiner: {
     flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
     backgroundColor: '#FFFFFF',
   },
   headingContainer: {

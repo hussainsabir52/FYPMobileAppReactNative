@@ -13,6 +13,7 @@ const DatePick = ({ navigation }) => {
   const [show2, setShow2] = useState(false);
   const [text1, setText1] = useState('');
   const [text2, setText2] = useState('');
+  var ContinuebtnDisable = true;
   const dispatch = useDispatch();
 
   const onChange1 = (event, SelectedDate) => {
@@ -58,6 +59,7 @@ const DatePick = ({ navigation }) => {
   const DateConfirm = () => {
     navigation.navigate('DaysOfWeek');
   };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -168,8 +170,12 @@ const DatePick = ({ navigation }) => {
           />
         )}
       </View>
+      {(ContinuebtnDisable = text1 === '' || text2 === '' ? true : false)}
       <View style={styles.Continue}>
-        <TouchableOpacity style={styles.btnConfirm} onPress={DateConfirm}>
+        <TouchableOpacity
+          style={styles.btnConfirm}
+          onPress={DateConfirm}
+          disabled={ContinuebtnDisable}>
           <Text style={styles.btnText}>Continue</Text>
         </TouchableOpacity>
       </View>
