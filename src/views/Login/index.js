@@ -47,6 +47,7 @@ const Login = ({ navigation }) => {
               navigation.navigate('Home');
             }
             else{
+              console.log('splash off')
                 setSplashLoader(false);
             }
           } catch (e) {
@@ -156,6 +157,7 @@ const Login = ({ navigation }) => {
         <FontAwesomeIcon icon={faUser} size={20} style={{ flex: 1 }} />
 
         <TextInput
+          value={email}
           placeholder="Username"
           placeholderTextColor="#4f4f4f"
           style={styles.textInput}
@@ -166,6 +168,7 @@ const Login = ({ navigation }) => {
         <FontAwesomeIcon icon={faLock} size={20} style={{ flex: 1 }} />
 
         <TextInput
+          value={password}
           placeholder="Password"
           placeholderTextColor="#4f4f4f"
           secureTextEntry={true}

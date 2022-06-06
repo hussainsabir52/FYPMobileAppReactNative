@@ -33,6 +33,7 @@ export default styles = StyleSheet.create({
     marginVertical: 20,
     marginHorizontal: 20,
     alignItems: 'center',
+    justifyContent: 'center',
   },
   headerText: {
     flex: 1,
@@ -40,6 +41,7 @@ export default styles = StyleSheet.create({
     fontSize: 20,
     color: colors.black,
     textAlign: 'center',
+    marginLeft: '10%',
   },
   chevronLeft: {
     justifyContent: 'space-between',
@@ -47,5 +49,10 @@ export default styles = StyleSheet.create({
     borderRadius: 20,
     padding: 5,
     elevation: 5,
+  },
+  red: {
+    fontFamily: 'Inter-Regular',
+    fontSize: 16,
+    color: '#FF0000',
   },
 });
