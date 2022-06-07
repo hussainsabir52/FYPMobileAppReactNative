@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import styles from './styles';
-import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -29,22 +29,25 @@ const Profile = ({ navigation }) => {
         </TouchableOpacity>
         <Text style={styles.headerText}>Profile</Text>
       </View>
-      <View>
+      <View style={{ alignItems: 'center' }}>
         <Image
-          source={require('../../../images/user-profile.png')}
+          source={require('../../../images/user.jpg')}
           style={styles.userProfile}></Image>
       </View>
-      <View style={styles.textWrapper}>
-        <Text style={styles.text}>Full Name: </Text>
-        <Text style={[styles.text, styles.userdata]}>Muhammad Hasan</Text>
+      <View style={styles.nameWrapper}>
+        <Text style={styles.username}>Muhammad Hasan</Text>
       </View>
       <View style={styles.textWrapper}>
-        <Text style={styles.text}>Email: </Text>
-        <Text style={[styles.text, styles.userdata]}>mhasanbvs@gmail.com</Text>
+        <Feather name="mail" color="#989898" size={20} />
+        <Text style={styles.text}>mhasanbvs@gmail.com</Text>
       </View>
       <View style={styles.textWrapper}>
-        <Text style={styles.text}>Contact No: </Text>
-        <Text style={[styles.text, styles.userdata]}>0300-000000</Text>
+        <Feather name="phone" color="#989898" size={20} />
+        <Text style={styles.text}>0300-12345678</Text>
+      </View>
+      <View style={styles.textWrapper}>
+        <Feather name="user" color="#989898" size={20} />
+        <Text style={styles.text}>Male</Text>
       </View>
       <View
         style={{

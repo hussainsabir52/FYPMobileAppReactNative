@@ -21,6 +21,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
 const Delivery = ({ navigation }) => {
+  const locList = useSelector((state) => state.locationList);
+  const toLoc = useSelector((state) => state.rideNowRequest.dropoff_id);
+  const fromLoc = useSelector((state) => state.rideNowRequest.pickup_id);
+  let dropoff, pickup;
+  for (let i = 0; i < locList.length; i++) {
+    if (toLoc == i + 1) {
+      dropoff = locList[i].address;
+    }
+    if (fromLoc == i + 1) {
+      pickup = locList[i].address;
+    }
+  }
+
   const dispatch = useDispatch();
   const { user_id, dropoff_id, pickup_id, fare } = useSelector(
     (state) => state.rideNowRequest,
@@ -72,7 +85,7 @@ const Delivery = ({ navigation }) => {
         <Text style={styles.LocationHeading}>Location</Text>
         <View style={styles.pickup}>
           <Text style={[styles.LocationHeading, { fontSize: 16 }]}>
-            Block 13D/1, Gulshan-e-Iqbal
+            {pickup}
           </Text>
         </View>
         <AntDesign
@@ -82,7 +95,7 @@ const Delivery = ({ navigation }) => {
           style={styles.arrowdown}></AntDesign>
         <View style={styles.dropoff}>
           <Text style={[styles.LocationHeading, { fontSize: 16 }]}>
-            Manzil Pump
+            {dropoff}
           </Text>
         </View>
       </View>

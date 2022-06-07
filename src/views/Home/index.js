@@ -21,7 +21,12 @@ import Feather from 'react-native-vector-icons/Feather';
 import axios from 'axios';
 import colors from '../../../assets/colors/color';
 import { locationList } from '../../actions/locationList';
-import { setTypeRideNow, setTypeDelivery, setTypeMonthlyContract } from '../../actions/rideType';
+import {
+  setTypeRideNow,
+  setTypeDelivery,
+  setTypeMonthlyContract,
+  setTypeCarpooling,
+} from '../../actions/rideType';
 
 const Home = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -43,6 +48,7 @@ const Home = ({ navigation }) => {
     navigation.navigate('DatePick');
   };
   const CarpoolingHandler = () => {
+    dispatch(setTypeCarpooling());
     navigation.navigate('GenderSelector');
   };
   const profileHandler = () => {

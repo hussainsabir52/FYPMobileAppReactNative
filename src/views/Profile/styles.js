@@ -7,11 +7,9 @@ import {
 
 export default styles = StyleSheet.create({
   userProfile: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    borderWidth: 1,
-    borderColor: '#5C5F68',
+    width: 130,
+    height: 130,
+    borderRadius: 70,
     margin: 20,
     marginTop: 80,
   },
@@ -19,13 +17,13 @@ export default styles = StyleSheet.create({
     color: '#000',
     fontFamily: 'Inter-Regular',
     fontSize: 15,
+    paddingHorizontal: 20,
   },
-  userdata: {
-    color: '#8D8D8D',
-  },
+
   textWrapper: {
     margin: 10,
     marginHorizontal: 30,
+    marginTop: 20,
     flexDirection: 'row',
   },
   header: {
@@ -40,7 +38,7 @@ export default styles = StyleSheet.create({
     fontFamily: 'NotoSans-SemiBold',
     fontSize: 20,
     color: colors.black,
-    textAlign: 'center',
+    alignSelf: 'center',
     marginLeft: '10%',
   },
   chevronLeft: {
@@ -54,5 +52,17 @@ export default styles = StyleSheet.create({
     fontFamily: 'Inter-Regular',
     fontSize: 16,
     color: '#FF0000',
+  },
+  username: {
+    fontFamily: 'NotoSans-SemiBold',
+    color: '#000',
+    fontSize: 20,
+  },
+  nameWrapper: {
+    alignItems: 'center',
+    borderBottomColor: '#DBDBDB',
+    borderBottomWidth: 1,
+    marginHorizontal: 30,
+    paddingBottom: 30,
   },
 });

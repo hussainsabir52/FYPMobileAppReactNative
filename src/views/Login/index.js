@@ -29,35 +29,35 @@ const Login = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [splashLoader, setSplashLoader] = useState(true);
-  const userDATA = useSelector((state) => state.isLogged)
+  const userDATA = useSelector((state) => state.isLogged);
   const clearstorage = async () => {
     await AsyncStorage.clear();
   };
 
   useEffect(() => {
     const checkUser = async () => {
-        try {
-            let value = await AsyncStorage.getItem('userData');
-            //   yaha pe !== ayega next line mai
-            const userD = JSON.parse(value)
-            if (value != null) {
-              dispatch(isLogged(userD));
-              dispatch(setUserId(userD.userID));
-              console.log(userD.firstName)
-              navigation.navigate('Home');
-            }
-            else{
-              console.log('splash off')
-                setSplashLoader(false);
-            }
-          } catch (e) {
-            console.log(e);
-          }
-    }
+      try {
+        let value = await AsyncStorage.getItem('userData');
+        //   yaha pe !== ayega next line mai
+        const userD = JSON.parse(value);
+        if (value != null) {
+          dispatch(isLogged(userD));
+          dispatch(setUserId(userD.userID));
+          console.log(userD.firstName);
+          navigation.navigate('Home');
+        } else {
+          console.log('splash off');
+          setSplashLoader(false);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    };
     setTimeout(() => {
-        checkUser();
-      }, 1000);
-    
+      checkUser();
+    }, 1000);
+    setEmail('');
+    setPassword('');
   }, []);
 
   //   useEffect(() => {
@@ -72,7 +72,7 @@ const Login = ({ navigation }) => {
   };
 
   const forgotPassHandler = () => {
-    navigation.navigate('OnTrip');
+    // navigation.navigate('OnTrip');
   };
 
   const loginInHandler = async () => {
@@ -93,7 +93,10 @@ const Login = ({ navigation }) => {
               navigation.navigate('EmailVerification', { email: email });
             } else {
               try {
-                await AsyncStorage.setItem('userData', JSON.stringify(results.userInfo));
+                await AsyncStorage.setItem(
+                  'userData',
+                  JSON.stringify(results.userInfo),
+                );
               } catch (e) {
                 console.log(e);
               }
@@ -102,6 +105,8 @@ const Login = ({ navigation }) => {
               setIsLoading(false);
               console.log('This is user data from redux ' + user);
               console.log(user);
+              setEmail('');
+              setPassword('');
               navigation.navigate('Home');
             }
           }
@@ -121,7 +126,7 @@ const Login = ({ navigation }) => {
         });
       }
     } else {
-        setIsLoading(false);
+      setIsLoading(false);
       showMessage({
         message: 'Username Required !!',
         type: 'danger',
@@ -140,73 +145,77 @@ const Login = ({ navigation }) => {
   return (
     <ScrollView style={styles.scroll} contentContainerStyle={styles.container}>
       <View>
-      {(splashLoader) ? (<Logo/>) : <View>
-      <View style={styles.flex_row}>
-        <View style={styles.medium_title_box}>
-          <Text style={styles.medium_title} ellipsizeMode={'clip'}>
-            {'Welcome back!'}
-          </Text>
-        </View>
-      </View>
-      <View style={[styles.text_body_box, styles.text_body_box_layout]}>
-        <Text style={styles.text_body} ellipsizeMode={'clip'}>
-          {'Login to your existing account of Giro'}
-        </Text>
-      </View>
-      <View style={[styles.textInputView, styles.viewShadow]}>
-        <FontAwesomeIcon icon={faUser} size={20} style={{ flex: 1 }} />
+        {splashLoader ? (
+          <Logo />
+        ) : (
+          <View>
+            <View style={styles.flex_row}>
+              <View style={styles.medium_title_box}>
+                <Text style={styles.medium_title} ellipsizeMode={'clip'}>
+                  {'Welcome back!'}
+                </Text>
+              </View>
+            </View>
+            <View style={[styles.text_body_box, styles.text_body_box_layout]}>
+              <Text style={styles.text_body} ellipsizeMode={'clip'}>
+                {'Login to your existing account of Giro'}
+              </Text>
+            </View>
+            <View style={[styles.textInputView, styles.viewShadow]}>
+              <FontAwesomeIcon icon={faUser} size={20} style={{ flex: 1 }} />
 
-        <TextInput
-          value={email}
-          placeholder="Username"
-          placeholderTextColor="#4f4f4f"
-          style={styles.textInput}
-          onChangeText={(value) => setEmail(value)}
-        />
-      </View>
-      <View style={[styles.textInputView, styles.viewShadow]}>
-        <FontAwesomeIcon icon={faLock} size={20} style={{ flex: 1 }} />
+              <TextInput
+                value={email}
+                placeholder="Username"
+                placeholderTextColor="#4f4f4f"
+                style={styles.textInput}
+                onChangeText={(value) => setEmail(value)}
+              />
+            </View>
+            <View style={[styles.textInputView, styles.viewShadow]}>
+              <FontAwesomeIcon icon={faLock} size={20} style={{ flex: 1 }} />
 
-        <TextInput
-          value={password}
-          placeholder="Password"
-          placeholderTextColor="#4f4f4f"
-          secureTextEntry={true}
-          style={styles.textInput}
-          onChangeText={(value) => setPassword(value)}
-        />
-      </View>
-      <View>
-        <Text onPress={forgotPassHandler} style={styles.forgotPassText}>
-          Forgot Password?
-        </Text>
-      </View>
-      <View style={styles.footer}>
-        <Button
-          label={
-            isLoading ? (
-              <ActivityIndicator size="small" color="#000000" />
-            ) : (
-              'LOG IN'
-            )
-          }
-          styles={{
-            button: styles.primaryButton,
-            label: styles.buttonWhiteText,
-          }}
-          onPress={loginInHandler}
-        />
-      </View>
-      <View style={styles.signUpView}>
-        <Text style={styles.signUpText}>
-          Don’t have an account?
-          <Text onPress={signUpHandler} style={styles.signUpText}>
-            {' '}
-            Sign Up
-          </Text>
-        </Text>
-      </View>
-      </View>}
+              <TextInput
+                value={password}
+                placeholder="Password"
+                placeholderTextColor="#4f4f4f"
+                secureTextEntry={true}
+                style={styles.textInput}
+                onChangeText={(value) => setPassword(value)}
+              />
+            </View>
+            <View>
+              <Text onPress={forgotPassHandler} style={styles.forgotPassText}>
+                Forgot Password?
+              </Text>
+            </View>
+            <View style={styles.footer}>
+              <Button
+                label={
+                  isLoading ? (
+                    <ActivityIndicator size="small" color="#000000" />
+                  ) : (
+                    'LOG IN'
+                  )
+                }
+                styles={{
+                  button: styles.primaryButton,
+                  label: styles.buttonWhiteText,
+                }}
+                onPress={loginInHandler}
+              />
+            </View>
+            <View style={styles.signUpView}>
+              <Text style={styles.signUpText}>
+                Don’t have an account?
+                <Text onPress={signUpHandler} style={styles.signUpText}>
+                  {' '}
+                  Sign Up
+                </Text>
+              </Text>
+            </View>
+          </View>
+        )}
       </View>
     </ScrollView>
   );

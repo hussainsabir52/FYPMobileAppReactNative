@@ -17,6 +17,7 @@ import styles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPickupId } from '../../actions/rideNowRequest';
 import Feather from 'react-native-vector-icons/Feather';
+import { or } from 'react-native-reanimated';
 export default function PickupLocation({ navigation }, nextNavigate) {
   const [search, setSearch] = useState('');
   const [BSheight, setBSheight] = useState(150);
@@ -25,7 +26,9 @@ export default function PickupLocation({ navigation }, nextNavigate) {
   const [location, setLocation] = useState(null);
   const [ConfirmbtnShow, setConfirmbtnShow] = useState(false);
 
-  const { rideNow, Delivery, monthlyContract } = useSelector((state) => state.rideType);
+  const { rideNow, Delivery, monthlyContract, Carpooling } = useSelector(
+    (state) => state.rideType,
+  );
 
   const locations = useSelector((state) => state.locationList);
 
@@ -54,12 +57,12 @@ export default function PickupLocation({ navigation }, nextNavigate) {
   const confirmPickupHandler = () => {
     console.log('this is ridenow and delivery');
     console.log(rideNow, Delivery);
-    if (rideNow == true) {
+    if (rideNow == true || Carpooling == true) {
       navigation.navigate('RequestVehicle');
     } else if (Delivery == true) {
       navigation.navigate('Delivery');
     } else if (monthlyContract == true) {
-      navigation.navigate('Summary')
+      navigation.navigate('Summary');
     }
   };
 
